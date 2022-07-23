@@ -1,19 +1,30 @@
 #!/bin/bash +x
 
+VERSION="0.0.0"
 if [ -n "$1" ]; then
     VERSION=$1
-else
-    echo 'Version is not set'
-    exit 1
 fi
 
-echo "Upgrading libraries to version: v$VERSION"
+echo "Building version: $VERSION"
 
-IFS=. VERSION_PARTS=($VERSION) IFS=' '
-MAJOR=${VERSION_PARTS[0]}
+build()
+{
+  GOOS=$1
+  GOARCH=$2
+  EXECNAME=$3
 
-echo "Major libraries version: v$MAJOR"
+  echo "Building ${GOOS}_${GOARCH}/${EXECNAME}"
+  env GOOS=$GOOS GOARCH=$GOARCH go build -ldflags "-s -w" -o ./dist/${GOOS}_${GOARCH}/${EXECNAME} specgen.go
+  if [ $? -ne 0 ]; then
+      echo "An error has occurred while building ${GOOS}_${GOARCH}/${EXECNAME}! Aborting the script execution..."
+      exit 1
+  fi
+  echo 'Successfully built'
+}
 
-go get github.com/specgen-io/specgen/v$MAJOR@v$VERSION
+build windows amd64 specgen.exe
+build darwin amd64 specgen
+build darwin arm64 specgen
+build linux amd64 specgen
 
-go build
+echo "Done building version: $VERSION"
