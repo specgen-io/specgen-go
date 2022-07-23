@@ -1,0 +1,59 @@
+# github.com/dollarshaveclub/line v0.0.0-20171219191008-fc7a351a8b58
+## explicit
+github.com/dollarshaveclub/line
+# github.com/fatih/camelcase v1.0.0
+## explicit
+github.com/fatih/camelcase
+# github.com/getkin/kin-openapi v0.85.0
+## explicit; go 1.14
+github.com/getkin/kin-openapi/jsoninfo
+github.com/getkin/kin-openapi/openapi3
+# github.com/ghodss/yaml v1.0.0
+## explicit
+github.com/ghodss/yaml
+# github.com/go-openapi/jsonpointer v0.19.5
+## explicit; go 1.13
+github.com/go-openapi/jsonpointer
+# github.com/go-openapi/swag v0.19.5
+## explicit
+github.com/go-openapi/swag
+# github.com/google/go-cmp v0.5.6
+## explicit; go 1.8
+github.com/google/go-cmp/cmp
+github.com/google/go-cmp/cmp/internal/diff
+github.com/google/go-cmp/cmp/internal/flags
+github.com/google/go-cmp/cmp/internal/function
+github.com/google/go-cmp/cmp/internal/value
+# github.com/inconshreveable/mousetrap v1.0.0
+## explicit
+github.com/inconshreveable/mousetrap
+# github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e
+## explicit
+github.com/mailru/easyjson/buffer
+github.com/mailru/easyjson/jlexer
+github.com/mailru/easyjson/jwriter
+# github.com/pinzolo/casee v0.0.0-20210416022938-38877fea886d
+## explicit
+github.com/pinzolo/casee
+# github.com/pkg/errors v0.9.1
+## explicit
+github.com/pkg/errors
+# github.com/spf13/cobra v1.2.1
+## explicit; go 1.14
+github.com/spf13/cobra
+# github.com/spf13/pflag v1.0.5
+## explicit; go 1.12
+github.com/spf13/pflag
+# gopkg.in/specgen-io/yaml.v3 v3.0.0-20211212030207-33c98a79c251
+## explicit; go 1.16
+gopkg.in/specgen-io/yaml.v3
+# gopkg.in/yaml.v2 v2.4.0
+## explicit; go 1.15
+gopkg.in/yaml.v2
+# gotest.tools v2.2.0+incompatible
+## explicit
+gotest.tools/assert
+gotest.tools/assert/cmp
+gotest.tools/internal/difflib
+gotest.tools/internal/format
+gotest.tools/internal/source
