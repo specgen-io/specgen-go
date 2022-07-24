@@ -2,8 +2,6 @@ module github.com/specgen-io/specgen-go/v2
 
 go 1.18
 
-replace github.com/specgen-io/specgen/yamlx/v2 => ../yamlx
-
 require (
 	github.com/dollarshaveclub/line v0.0.0-20171219191008-fc7a351a8b58
 	github.com/getkin/kin-openapi v0.85.0
