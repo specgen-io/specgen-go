@@ -2,11 +2,12 @@ package ruby
 
 import (
 	"fmt"
-	"github.com/pinzolo/casee"
-	"github.com/specgen-io/specgen-go/v2/spec"
-	"github.com/specgen-io/specgen-go/v2/generator"
 	"path/filepath"
 	"strings"
+
+	"github.com/pinzolo/casee"
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 func GenerateClient(specification *spec.Spec, generatePath string) *generator.Sources {

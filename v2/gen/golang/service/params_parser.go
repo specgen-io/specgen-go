@@ -2,11 +2,12 @@ package service
 
 import (
 	"fmt"
+	"strings"
+
+	"github.com/specgen-io/specgen-go/v2/generator"
 	"github.com/specgen-io/specgen-go/v2/spec"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/module"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/types"
-	"github.com/specgen-io/specgen-go/v2/generator"
-	"strings"
 )
 
 func parserDefaultName(param *spec.NamedParam) (string, *string) {

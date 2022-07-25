@@ -1,9 +1,10 @@
 package superstruct
 
 import (
-	"github.com/specgen-io/specgen-go/v2/gen/ts/modules"
-	"github.com/specgen-io/specgen-go/v2/generator"
 	"strings"
+
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/gen/ts/modules"
 )
 
 var Superstruct = "superstruct"

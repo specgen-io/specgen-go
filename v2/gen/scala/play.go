@@ -2,10 +2,11 @@ package scala
 
 import (
 	"fmt"
+	"strings"
+
+	"github.com/specgen-io/specgen-go/v2/generator"
 	"github.com/specgen-io/specgen-go/v2/spec"
 	"github.com/specgen-io/specgen-go/v2/gen/openapi"
-	"github.com/specgen-io/specgen-go/v2/generator"
-	"strings"
 )
 
 func GeneratePlayService(specification *spec.Spec, swaggerPath string, generatePath string, servicesPath string) *generator.Sources {

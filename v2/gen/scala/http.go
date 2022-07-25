@@ -1,8 +1,9 @@
 package scala
 
 import (
-	"github.com/specgen-io/specgen-go/v2/generator"
 	"strings"
+
+	"github.com/specgen-io/specgen-go/v2/generator"
 )
 
 func generateStringParams(thepackage Package) *generator.CodeFile {

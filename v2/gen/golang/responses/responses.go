@@ -2,10 +2,11 @@ package responses
 
 import (
 	"fmt"
+
+	"github.com/specgen-io/specgen-go/v2/generator"
 	"github.com/specgen-io/specgen-go/v2/spec"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/types"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/writer"
-	"github.com/specgen-io/specgen-go/v2/generator"
 )
 
 func NewResponse(response *spec.OperationResponse, body string) string {

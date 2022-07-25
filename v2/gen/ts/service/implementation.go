@@ -2,12 +2,13 @@ package service
 
 import (
 	"fmt"
+	"strings"
+
+	"github.com/specgen-io/specgen-go/v2/generator"
 	"github.com/specgen-io/specgen-go/v2/spec"
 	"github.com/specgen-io/specgen-go/v2/gen/ts/modules"
 	"github.com/specgen-io/specgen-go/v2/gen/ts/responses"
 	"github.com/specgen-io/specgen-go/v2/gen/ts/writer"
-	"github.com/specgen-io/specgen-go/v2/generator"
-	"strings"
 )
 
 func generateServicesImplementations(specification *spec.Spec, generatedModule modules.Module, module modules.Module) []generator.CodeFile {

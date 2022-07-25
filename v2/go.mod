@@ -6,10 +6,13 @@ go 1.18
 
 
 
+
+
 require (
 	github.com/dollarshaveclub/line v0.0.0-20171219191008-fc7a351a8b58
 	github.com/getkin/kin-openapi v0.85.0
 	github.com/pinzolo/casee v1.0.0
+
 
 
 	github.com/spf13/cobra v1.2.1
