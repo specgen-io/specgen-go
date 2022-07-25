@@ -2,14 +2,14 @@ package service
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen/v2/gen/golang/client"
-	"github.com/specgen-io/specgen/v2/gen/golang/imports"
-	"github.com/specgen-io/specgen/v2/gen/golang/models"
-	"github.com/specgen-io/specgen/v2/gen/golang/module"
-	"github.com/specgen-io/specgen/v2/gen/golang/types"
-	"github.com/specgen-io/specgen/v2/gen/golang/writer"
-	"github.com/specgen-io/specgen/v2/generator"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/gen/golang/client"
+	"github.com/specgen-io/specgen-go/v2/gen/golang/imports"
+	"github.com/specgen-io/specgen-go/v2/gen/golang/models"
+	"github.com/specgen-io/specgen-go/v2/gen/golang/module"
+	"github.com/specgen-io/specgen-go/v2/gen/golang/types"
+	"github.com/specgen-io/specgen-go/v2/gen/golang/writer"
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/spec"
 	"strings"
 )
 

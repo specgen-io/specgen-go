@@ -1,14 +1,14 @@
 package gen
 
 import (
-	"github.com/specgen-io/specgen/v2/gen/golang"
-	"github.com/specgen-io/specgen/v2/gen/java"
-	"github.com/specgen-io/specgen/v2/gen/kotlin"
-	"github.com/specgen-io/specgen/v2/gen/openapi"
-	"github.com/specgen-io/specgen/v2/gen/ruby"
-	"github.com/specgen-io/specgen/v2/gen/scala"
-	"github.com/specgen-io/specgen/v2/gen/ts"
-	"github.com/specgen-io/specgen/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/gen/golang"
+	"github.com/specgen-io/specgen-go/v2/gen/java"
+	"github.com/specgen-io/specgen-go/v2/gen/kotlin"
+	"github.com/specgen-io/specgen-go/v2/gen/openapi"
+	"github.com/specgen-io/specgen-go/v2/gen/ruby"
+	"github.com/specgen-io/specgen-go/v2/gen/scala"
+	"github.com/specgen-io/specgen-go/v2/gen/ts"
+	"github.com/specgen-io/specgen-go/v2/generator"
 )
 
 var Generators = []generator.Generator{

@@ -1,8 +1,8 @@
 package client
 
 import (
-	"github.com/specgen-io/specgen/v2/gen/java/models"
-	"github.com/specgen-io/specgen/v2/gen/java/types"
+	"github.com/specgen-io/specgen-go/v2/gen/java/models"
+	"github.com/specgen-io/specgen-go/v2/gen/java/types"
 )
 
 type Generator struct {

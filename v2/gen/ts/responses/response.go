@@ -2,9 +2,9 @@ package responses
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen/v2/gen/ts/types"
-	"github.com/specgen-io/specgen/v2/generator"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/gen/ts/types"
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 func GenerateOperationResponse(w *generator.Writer, operation *spec.NamedOperation) {

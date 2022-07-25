@@ -2,9 +2,9 @@ package scala
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen/v2/gen/openapi"
-	"github.com/specgen-io/specgen/v2/generator"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/gen/openapi"
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/spec"
 	"strings"
 )
 

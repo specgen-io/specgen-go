@@ -1,8 +1,8 @@
 package scala
 
 import (
-	"github.com/specgen-io/specgen/v2/generator"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 var Models = generator.Generator{

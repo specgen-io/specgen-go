@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"github.com/specgen-io/specgen/v2/console"
-	"github.com/specgen-io/specgen/v2/convert/openapi"
-	"github.com/specgen-io/specgen/v2/fail"
+	"github.com/specgen-io/specgen-go/v2/console"
+	"github.com/specgen-io/specgen-go/v2/convert/openapi"
+	"github.com/specgen-io/specgen-go/v2/fail"
 	"github.com/spf13/cobra"
 )
 

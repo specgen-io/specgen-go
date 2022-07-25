@@ -1,11 +1,11 @@
 package golang
 
 import (
-	"github.com/specgen-io/specgen/v2/gen/golang/client"
-	"github.com/specgen-io/specgen/v2/gen/golang/models"
-	"github.com/specgen-io/specgen/v2/gen/golang/service"
-	"github.com/specgen-io/specgen/v2/generator"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/gen/golang/client"
+	"github.com/specgen-io/specgen-go/v2/gen/golang/models"
+	"github.com/specgen-io/specgen-go/v2/gen/golang/service"
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 var Models = generator.Generator{

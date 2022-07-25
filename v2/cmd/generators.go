@@ -1,10 +1,10 @@
 package cmd
 
 import (
-	"github.com/specgen-io/specgen/v2/console"
-	"github.com/specgen-io/specgen/v2/fail"
-	"github.com/specgen-io/specgen/v2/gen"
-	"github.com/specgen-io/specgen/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/console"
+	"github.com/specgen-io/specgen-go/v2/fail"
+	"github.com/specgen-io/specgen-go/v2/gen"
+	"github.com/specgen-io/specgen-go/v2/generator"
 	"github.com/spf13/cobra"
 	"strings"
 )

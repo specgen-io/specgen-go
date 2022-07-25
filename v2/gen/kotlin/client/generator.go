@@ -2,11 +2,11 @@ package client
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen/v2/gen/kotlin/models"
-	"github.com/specgen-io/specgen/v2/gen/kotlin/modules"
-	"github.com/specgen-io/specgen/v2/gen/kotlin/types"
-	"github.com/specgen-io/specgen/v2/generator"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/gen/kotlin/models"
+	"github.com/specgen-io/specgen-go/v2/gen/kotlin/modules"
+	"github.com/specgen-io/specgen-go/v2/gen/kotlin/types"
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 type ClientGenerator interface {

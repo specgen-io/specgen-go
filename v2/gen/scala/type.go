@@ -2,7 +2,7 @@ package scala
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 func ScalaType(typ *spec.TypeDef) string {

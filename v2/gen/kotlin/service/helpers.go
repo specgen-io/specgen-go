@@ -2,7 +2,7 @@ package service
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 func serviceName(api *spec.Api) string {

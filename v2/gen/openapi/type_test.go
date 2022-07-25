@@ -1,8 +1,8 @@
 package openapi
 
 import (
-	"github.com/specgen-io/specgen/v2/spec"
-	"github.com/specgen-io/specgen/yamlx/v2"
+	"github.com/specgen-io/specgen-go/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/yamlx"
 	"gotest.tools/assert"
 	"strings"
 	"testing"

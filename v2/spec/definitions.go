@@ -1,7 +1,7 @@
 package spec
 
 import (
-	"github.com/specgen-io/specgen/yamlx/v2"
+	"github.com/specgen-io/specgen-go/v2/yamlx"
 	"gopkg.in/specgen-io/yaml.v3"
 )
 

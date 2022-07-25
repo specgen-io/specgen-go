@@ -1,10 +1,10 @@
 package service
 
 import (
-	"github.com/specgen-io/specgen/v2/gen/kotlin/modules"
-	"github.com/specgen-io/specgen/v2/gen/openapi"
-	"github.com/specgen-io/specgen/v2/generator"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/gen/kotlin/modules"
+	"github.com/specgen-io/specgen-go/v2/gen/openapi"
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 func Generate(specification *spec.Spec, jsonlib, server, packageName, swaggerPath, generatePath, servicesPath string) *generator.Sources {

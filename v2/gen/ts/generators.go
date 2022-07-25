@@ -1,11 +1,11 @@
 package ts
 
 import (
-	"github.com/specgen-io/specgen/v2/gen/ts/client"
-	"github.com/specgen-io/specgen/v2/gen/ts/service"
-	"github.com/specgen-io/specgen/v2/gen/ts/validations"
-	"github.com/specgen-io/specgen/v2/generator"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/gen/ts/client"
+	"github.com/specgen-io/specgen-go/v2/gen/ts/service"
+	"github.com/specgen-io/specgen-go/v2/gen/ts/validations"
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 var ValidationTsValues = []string{"superstruct", "io-ts"}

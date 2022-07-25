@@ -1,8 +1,8 @@
 package cmd
 
 import (
-	"github.com/specgen-io/specgen/v2/fail"
-	"github.com/specgen-io/specgen/v2/markdown"
+	"github.com/specgen-io/specgen-go/v2/fail"
+	"github.com/specgen-io/specgen-go/v2/markdown"
 	"github.com/spf13/cobra"
 	"github.com/spf13/pflag"
 	"io/ioutil"

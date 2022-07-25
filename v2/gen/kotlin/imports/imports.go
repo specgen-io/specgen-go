@@ -1,7 +1,7 @@
 package imports
 
 import (
-	"github.com/specgen-io/specgen/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/generator"
 )
 
 type imports struct {

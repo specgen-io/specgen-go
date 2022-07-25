@@ -2,7 +2,7 @@ package types
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 func DefaultValue(typ *spec.TypeDef, value string) string {

@@ -1,9 +1,9 @@
 package client
 
 import (
-	"github.com/specgen-io/specgen/v2/gen/kotlin/modules"
-	"github.com/specgen-io/specgen/v2/generator"
-	"github.com/specgen-io/specgen/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/gen/kotlin/modules"
+	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 func Generate(specification *spec.Spec, jsonlib, client, packageName, generatePath string) *generator.Sources {
