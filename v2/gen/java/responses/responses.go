@@ -2,11 +2,11 @@ package responses
 
 import (
 	"fmt"
+	"github.com/specgen-io/specgen-go/v2/spec"
 	"github.com/specgen-io/specgen-go/v2/gen/java/packages"
 	"github.com/specgen-io/specgen-go/v2/gen/java/types"
 	"github.com/specgen-io/specgen-go/v2/gen/java/writer"
 	"github.com/specgen-io/specgen-go/v2/generator"
-	"github.com/specgen-io/specgen-go/v2/spec"
 	"strings"
 )
 

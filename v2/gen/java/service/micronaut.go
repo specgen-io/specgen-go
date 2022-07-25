@@ -6,13 +6,13 @@ import (
 	"strings"
 
 	"github.com/pinzolo/casee"
+	"github.com/specgen-io/specgen-go/v2/spec"
 	"github.com/specgen-io/specgen-go/v2/gen/java/imports"
 	"github.com/specgen-io/specgen-go/v2/gen/java/models"
 	"github.com/specgen-io/specgen-go/v2/gen/java/packages"
 	"github.com/specgen-io/specgen-go/v2/gen/java/responses"
 	"github.com/specgen-io/specgen-go/v2/gen/java/types"
 	"github.com/specgen-io/specgen-go/v2/gen/java/writer"
-	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 var Micronaut = "micronaut"

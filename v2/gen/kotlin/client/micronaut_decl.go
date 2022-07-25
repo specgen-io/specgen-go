@@ -3,13 +3,13 @@ package client
 import (
 	"fmt"
 	"github.com/pinzolo/casee"
+	"github.com/specgen-io/specgen-go/v2/spec"
 	"github.com/specgen-io/specgen-go/v2/gen/kotlin/imports"
 	"github.com/specgen-io/specgen-go/v2/gen/kotlin/models"
 	"github.com/specgen-io/specgen-go/v2/gen/kotlin/modules"
 	"github.com/specgen-io/specgen-go/v2/gen/kotlin/types"
 	"github.com/specgen-io/specgen-go/v2/gen/kotlin/writer"
 	"github.com/specgen-io/specgen-go/v2/generator"
-	"github.com/specgen-io/specgen-go/v2/spec"
 )
 
 var MicronautDecl = "micronaut-declarative"

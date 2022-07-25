@@ -2,8 +2,8 @@ package scala
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen-go/v2/generator"
 	"github.com/specgen-io/specgen-go/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/generator"
 	"strings"
 )
 

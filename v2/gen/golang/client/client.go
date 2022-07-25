@@ -3,6 +3,7 @@ package client
 import (
 	"fmt"
 	"github.com/pinzolo/casee"
+	"github.com/specgen-io/specgen-go/v2/spec"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/common"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/imports"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/models"
@@ -11,7 +12,6 @@ import (
 	"github.com/specgen-io/specgen-go/v2/gen/golang/types"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/writer"
 	"github.com/specgen-io/specgen-go/v2/generator"
-	"github.com/specgen-io/specgen-go/v2/spec"
 	"strings"
 )
 
