@@ -4,11 +4,11 @@ import (
 	"github.com/specgen-io/specgen-go/v2/generator"
 	"github.com/specgen-io/specgen-go/v2/openapi"
 	"github.com/specgen-io/specgen-go/v2/ruby"
+	"github.com/specgen-io/specgen-go/v2/scala"
+	"github.com/specgen-io/specgen-go/v2/typescript"
 	"github.com/specgen-io/specgen-go/v2/gen/golang"
 	"github.com/specgen-io/specgen-go/v2/gen/java"
 	"github.com/specgen-io/specgen-go/v2/gen/kotlin"
-	"github.com/specgen-io/specgen-go/v2/gen/scala"
-	"github.com/specgen-io/specgen-go/v2/gen/ts"
 )
 
 var Generators = []generator.Generator{
@@ -26,8 +26,8 @@ var Generators = []generator.Generator{
 	scala.Models,
 	scala.Client,
 	scala.Service,
-	ts.Models,
-	ts.Client,
-	ts.Service,
+	typescript.Models,
+	typescript.Client,
+	typescript.Service,
 	openapi.Openapi,
 }
