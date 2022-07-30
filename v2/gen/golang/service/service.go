@@ -2,11 +2,11 @@ package service
 
 import (
 	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/openapi"
 	"github.com/specgen-io/specgen-go/v2/spec"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/models"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/module"
 	"github.com/specgen-io/specgen-go/v2/gen/golang/types"
-	"github.com/specgen-io/specgen-go/v2/gen/openapi"
 )
 
 func GenerateService(specification *spec.Spec, moduleName string, swaggerPath string, generatePath string, servicesPath string) *generator.Sources {

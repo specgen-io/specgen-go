@@ -2,8 +2,8 @@ package service
 
 import (
 	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/openapi"
 	"github.com/specgen-io/specgen-go/v2/spec"
-	"github.com/specgen-io/specgen-go/v2/gen/openapi"
 	"github.com/specgen-io/specgen-go/v2/gen/ts/modules"
 	"github.com/specgen-io/specgen-go/v2/gen/ts/validations"
 )
