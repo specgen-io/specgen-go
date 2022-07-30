@@ -6,14 +6,14 @@ import (
 
 	"github.com/pinzolo/casee"
 	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/golang/common"
+	"github.com/specgen-io/specgen-go/v2/golang/imports"
+	"github.com/specgen-io/specgen-go/v2/golang/models"
+	"github.com/specgen-io/specgen-go/v2/golang/module"
+	"github.com/specgen-io/specgen-go/v2/golang/responses"
+	"github.com/specgen-io/specgen-go/v2/golang/types"
+	"github.com/specgen-io/specgen-go/v2/golang/writer"
 	"github.com/specgen-io/specgen-go/v2/spec"
-	"github.com/specgen-io/specgen-go/v2/gen/golang/common"
-	"github.com/specgen-io/specgen-go/v2/gen/golang/imports"
-	"github.com/specgen-io/specgen-go/v2/gen/golang/models"
-	"github.com/specgen-io/specgen-go/v2/gen/golang/module"
-	"github.com/specgen-io/specgen-go/v2/gen/golang/responses"
-	"github.com/specgen-io/specgen-go/v2/gen/golang/types"
-	"github.com/specgen-io/specgen-go/v2/gen/golang/writer"
 )
 
 var ToPascalCase = casee.ToPascalCase
