@@ -22,8 +22,9 @@ go 1.18
 
 
 
+
+
 require (
-	github.com/dollarshaveclub/line v0.0.0-20171219191008-fc7a351a8b58
 	github.com/getkin/kin-openapi v0.85.0
 	github.com/pinzolo/casee v1.0.0
 
@@ -35,7 +36,8 @@ require (
 
 
 
-	github.com/spf13/cobra v1.2.1
+
+	github.com/spf13/cobra v1.5.0
 	github.com/spf13/pflag v1.0.5
 	gotest.tools v2.2.0+incompatible
 )
@@ -50,6 +52,7 @@ require (
 	github.com/mailru/easyjson v0.0.0-20190626092158-b2ccc519800e // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 
+	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e // indirect
 	gopkg.in/specgen-io/yaml.v3 v3.0.0-20211212030207-33c98a79c251 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

@@ -1,4 +1,4 @@
-package fail
+package cmd
 
 import (
 	"github.com/specgen-io/specgen-go/v2/console"
@@ -15,7 +15,7 @@ func FailF(format string, args ...interface{}) {
 	os.Exit(1)
 }
 
-func IfError(err error, args ...interface{}) {
+func FailIfError(err error, args ...interface{}) {
 	if err != nil {
 		console.ProblemLn(args...)
 		console.ProblemLn(err)
@@ -23,7 +23,7 @@ func IfError(err error, args ...interface{}) {
 	}
 }
 
-func IfErrorF(err error, format string, args ...interface{}) {
+func FailIfErrorF(err error, format string, args ...interface{}) {
 	if err != nil {
 		console.ProblemLnF(format, args...)
 		console.ProblemLn(err)
