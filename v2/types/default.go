@@ -2,7 +2,7 @@ package types
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/pinzolo/casee"
+	"github.com/pinzolo/casee"
 	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/spec/v2"
 )
 

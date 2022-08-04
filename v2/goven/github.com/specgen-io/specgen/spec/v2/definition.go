@@ -1,7 +1,7 @@
 package spec
 
 import (
-	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/gopkg.in/specgen-io/yaml.v3"
+	"gopkg.in/specgen-io/yaml.v3"
 	"strings"
 )
 

@@ -3,7 +3,7 @@ package spec
 import (
 	"fmt"
 	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/yamlx/v2"
-	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/gopkg.in/specgen-io/yaml.v3"
+	"gopkg.in/specgen-io/yaml.v3"
 )
 
 type UrlParams Params
