@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/specgen-io/specgen-go/v2/generator"
+	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/generator/v2"
 	"github.com/specgen-io/specgen-go/v2/imports"
 	"github.com/specgen-io/specgen-go/v2/module"
 	"github.com/specgen-io/specgen-go/v2/types"
 	"github.com/specgen-io/specgen-go/v2/writer"
-	"github.com/specgen-io/specgen-go/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/spec/v2"
 )
 
 func GenerateModels(specification *spec.Spec, moduleName string, generatePath string) *generator.Sources {

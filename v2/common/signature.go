@@ -6,7 +6,7 @@ import (
 
 	"github.com/specgen-io/specgen-go/v2/responses"
 	"github.com/specgen-io/specgen-go/v2/types"
-	"github.com/specgen-io/specgen-go/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/spec/v2"
 )
 
 func OperationSignature(operation *spec.NamedOperation, apiPackage *string) string {

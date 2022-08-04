@@ -2,7 +2,7 @@ package types
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen-go/v2/spec"
+	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/spec/v2"
 )
 
 func ApiHasBody(api *spec.Api) bool {
