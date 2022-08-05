@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/pinzolo/casee"
-	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/generator/v2"
+	"github.com/specgen-io/specgen-go/v2/goven/github.com/pinzolo/casee"
+	"github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/generator/v2"
 	"github.com/specgen-io/specgen-go/v2/common"
 	"github.com/specgen-io/specgen-go/v2/imports"
 	"github.com/specgen-io/specgen-go/v2/models"
@@ -13,7 +13,7 @@ import (
 	"github.com/specgen-io/specgen-go/v2/responses"
 	"github.com/specgen-io/specgen-go/v2/types"
 	"github.com/specgen-io/specgen-go/v2/writer"
-	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/spec/v2"
+	"github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/spec/v2"
 )
 
 var ToPascalCase = casee.ToPascalCase

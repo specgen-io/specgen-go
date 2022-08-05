@@ -2,8 +2,8 @@ package spec
 
 import (
 	"bytes"
-	"gopkg.in/specgen-io/yaml.v3"
-	"gotest.tools/assert"
+	"github.com/specgen-io/specgen-go/v2/goven/gopkg.in/specgen-io/yaml.v3"
+	"github.com/specgen-io/specgen-go/v2/goven/gotest.tools/assert"
 	"testing"
 )
 

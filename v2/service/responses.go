@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/generator/v2"
+	"github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/generator/v2"
 	"github.com/specgen-io/specgen-go/v2/module"
 )
 

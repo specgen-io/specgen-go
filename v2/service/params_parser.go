@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/generator/v2"
+	"github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/generator/v2"
 	"github.com/specgen-io/specgen-go/v2/module"
 	"github.com/specgen-io/specgen-go/v2/types"
-	"github.com/specgen-io/specgen-go/v2/github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/spec/v2"
+	"github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/spec/v2"
 )
 
 func parserDefaultName(param *spec.NamedParam) (string, *string) {

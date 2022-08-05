@@ -1,7 +1,7 @@
 package spec
 
 import (
-	"gopkg.in/specgen-io/yaml.v3"
+	"github.com/specgen-io/specgen-go/v2/goven/gopkg.in/specgen-io/yaml.v3"
 )
 
 type securityRef struct {
