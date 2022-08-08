@@ -7,7 +7,7 @@ package slices
 import (
 	"math/bits"
 
-	"github.com/specgen-io/specgen-go/v2/goven/golang.org/x/exp/constraints"
+	"github.com/specgen-io/specgen-golang/v2/goven/golang.org/x/exp/constraints"
 )
 
 // Sort sorts a slice of any ordered type in ascending order.

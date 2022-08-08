@@ -1,5 +1,5 @@
 /*Package cmp provides Comparisons for Assert and Check*/
-package cmp // import "github.com/specgen-io/specgen-go/v2/goven/gotest.tools/assert/cmp"
+package cmp // import "github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert/cmp"
 
 import (
 	"fmt"
@@ -7,8 +7,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp"
-	"github.com/specgen-io/specgen-go/v2/goven/gotest.tools/internal/format"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp"
+	"github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/format"
 )
 
 // Comparison is a function which compares values and returns ResultSuccess if
@@ -20,7 +20,7 @@ type Comparison func() Result
 // and succeeds if the values are equal.
 //
 // The comparison can be customized using comparison Options.
-// Package https://godoc.org/github.com/specgen-io/specgen-go/v2/goven/gotest.tools/assert/opt provides some additional
+// Package https://godoc.org/github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert/opt provides some additional
 // commonly used Options.
 func DeepEqual(x, y interface{}, opts ...cmp.Option) Comparison {
 	return func() (result Result) {
@@ -247,7 +247,7 @@ func formatErrorMessage(err error) string {
 	}); ok {
 		return fmt.Sprintf("%q\n%+v", err, err)
 	}
-	// This error was not wrapped with github.com/specgen-io/specgen-go/v2/goven/github.com/pkg/errors
+	// This error was not wrapped with github.com/specgen-io/specgen-golang/v2/goven/github.com/pkg/errors
 	return fmt.Sprintf("%q", err)
 }
 

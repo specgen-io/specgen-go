@@ -2,7 +2,7 @@
 package casee
 
 import (
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/fatih/camelcase"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/fatih/camelcase"
 	"strings"
 	"unicode"
 )

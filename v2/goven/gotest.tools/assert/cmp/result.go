@@ -6,7 +6,7 @@ import (
 	"go/ast"
 	"text/template"
 
-	"github.com/specgen-io/specgen-go/v2/goven/gotest.tools/internal/source"
+	"github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/source"
 )
 
 // Result of a Comparison.

@@ -26,7 +26,7 @@ import (
 	"sort"
 	"strings"
 
-	flag "github.com/specgen-io/specgen-go/v2/goven/github.com/spf13/pflag"
+	flag "github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/pflag"
 )
 
 // FParseErrWhitelist configures Flag parse errors to be ignored
@@ -410,7 +410,7 @@ func (c *Command) HelpFunc() func(*Command, []string) {
 	return func(c *Command, a []string) {
 		c.mergePersistentFlags()
 		// The help should be sent to stdout
-		// See https://github.com/specgen-io/specgen-go/v2/goven/github.com/spf13/cobra/issues/1002
+		// See https://github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/cobra/issues/1002
 		err := tmpl(c.OutOrStdout(), c.HelpTemplate(), c)
 		if err != nil {
 			c.PrintErrln(err)
@@ -1402,7 +1402,7 @@ func (c *Command) IsAvailableCommand() bool {
 // help topic command; additional help topic command is determined by the
 // fact that it is NOT runnable/hidden/deprecated, and has no sub commands that
 // are runnable/hidden/deprecated.
-// Concrete example: https://github.com/specgen-io/specgen-go/v2/goven/github.com/spf13/cobra/issues/393#issuecomment-282741924.
+// Concrete example: https://github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/cobra/issues/393#issuecomment-282741924.
 func (c *Command) IsAdditionalHelpTopicCommand() bool {
 	// if a command is runnable, deprecated, or hidden it is not a 'help' command
 	if c.Runnable() || len(c.Deprecated) != 0 || c.Hidden {

@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/inconshreveable/mousetrap"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/inconshreveable/mousetrap"
 )
 
 var preExecHookFn = preExecHook

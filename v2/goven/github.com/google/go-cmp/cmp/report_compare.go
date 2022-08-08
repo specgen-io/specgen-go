@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"reflect"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp/internal/value"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp/internal/value"
 )
 
 // numContextRecords is the number of surrounding equal records to print.

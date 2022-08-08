@@ -18,7 +18,7 @@ import (
 	"sort"
 	"strings"
 
-	flag "github.com/specgen-io/specgen-go/v2/goven/github.com/spf13/pflag"
+	flag "github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/pflag"
 )
 
 const (

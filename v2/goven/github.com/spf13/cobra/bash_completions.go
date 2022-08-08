@@ -8,7 +8,7 @@ import (
 	"sort"
 	"strings"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/spf13/pflag"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/pflag"
 )
 
 // Annotations for Bash completion.

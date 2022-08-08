@@ -35,9 +35,9 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp/internal/diff"
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp/internal/function"
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp/internal/value"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp/internal/diff"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp/internal/function"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp/internal/value"
 )
 
 // TODO(≥go1.18): Use any instead of interface{}.

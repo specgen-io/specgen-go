@@ -1,4 +1,4 @@
-package source // import "github.com/specgen-io/specgen-go/v2/goven/gotest.tools/internal/source"
+package source // import "github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/source"
 
 import (
 	"bytes"
@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/pkg/errors"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/pkg/errors"
 )
 
 const baseStackIndex = 1

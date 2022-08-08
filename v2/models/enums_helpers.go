@@ -3,8 +3,8 @@ package models
 import (
 	"strings"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/generator/v2"
-	"github.com/specgen-io/specgen-go/v2/module"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
+	"github.com/specgen-io/specgen-golang/v2/module"
 )
 
 func generateEnumsHelperFunctions(module module.Module) *generator.CodeFile {

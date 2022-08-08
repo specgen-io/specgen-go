@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp/internal/function"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp/internal/function"
 )
 
 // Option configures for specific behavior of Equal and Diff. In particular,

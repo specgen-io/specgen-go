@@ -12,7 +12,7 @@ import (
 	"time"
 	"unicode/utf8"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp/internal/flags"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp/internal/flags"
 )
 
 var randBool = rand.New(rand.NewSource(time.Now().Unix())).Intn(2) == 0

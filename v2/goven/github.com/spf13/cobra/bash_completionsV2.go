@@ -195,7 +195,7 @@ __%[1]s_handle_completion_types() {
         # Type: menu-complete/menu-complete-backward and insert-completions
         # If the user requested inserting one completion at a time, or all
         # completions at once on the command-line we must remove the descriptions.
-        # https://github.com/specgen-io/specgen-go/v2/goven/github.com/spf13/cobra/issues/1508
+        # https://github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/cobra/issues/1508
         local tab=$'\t' comp
         while IFS='' read -r comp; do
             [[ -z $comp ]] && continue

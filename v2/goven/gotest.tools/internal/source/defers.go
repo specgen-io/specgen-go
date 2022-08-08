@@ -4,7 +4,7 @@ import (
 	"go/ast"
 	"go/token"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/pkg/errors"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/pkg/errors"
 )
 
 func scanToDeferLine(fileset *token.FileSet, node ast.Node, lineNum int) ast.Node {

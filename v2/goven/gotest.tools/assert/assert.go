@@ -16,8 +16,8 @@ The example below shows assert used with some common types.
 	import (
 	    "testing"
 
-	    "github.com/specgen-io/specgen-go/v2/goven/gotest.tools/assert"
-	    is "github.com/specgen-io/specgen-go/v2/goven/gotest.tools/assert/cmp"
+	    "github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert"
+	    is "github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert/cmp"
 	)
 
 	func TestEverything(t *testing.T) {
@@ -49,7 +49,7 @@ The example below shows assert used with some common types.
 
 Comparisons
 
-Package https://godoc.org/github.com/specgen-io/specgen-go/v2/goven/gotest.tools/assert/cmp provides
+Package https://godoc.org/github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert/cmp provides
 many common comparisons. Additional comparisons can be written to compare
 values in other ways. See the example Assert (CustomComparison).
 
@@ -62,17 +62,17 @@ See http://bit.do/cmd-gty-migrate-from-testify.
 
 
 */
-package assert // import "github.com/specgen-io/specgen-go/v2/goven/gotest.tools/assert"
+package assert // import "github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert"
 
 import (
 	"fmt"
 	"go/ast"
 	"go/token"
 
-	gocmp "github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp"
-	"github.com/specgen-io/specgen-go/v2/goven/gotest.tools/assert/cmp"
-	"github.com/specgen-io/specgen-go/v2/goven/gotest.tools/internal/format"
-	"github.com/specgen-io/specgen-go/v2/goven/gotest.tools/internal/source"
+	gocmp "github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp"
+	"github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert/cmp"
+	"github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/format"
+	"github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/source"
 )
 
 // BoolOrComparison can be a bool, or cmp.Comparison. See Assert() for usage.
@@ -263,7 +263,7 @@ func Equal(t TestingT, x, y interface{}, msgAndArgs ...interface{}) {
 // DeepEqual uses google/go-cmp (http://bit.do/go-cmp) to assert two values are
 // equal and fails the test if they are not equal.
 //
-// Package https://godoc.org/github.com/specgen-io/specgen-go/v2/goven/gotest.tools/assert/opt provides some additional
+// Package https://godoc.org/github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert/opt provides some additional
 // commonly used Options.
 //
 // This is equivalent to Assert(t, cmp.DeepEqual(x, y)).

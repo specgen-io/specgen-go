@@ -12,7 +12,7 @@
 // floating-point numbers containing NaN values.
 package slices
 
-import "github.com/specgen-io/specgen-go/v2/goven/golang.org/x/exp/constraints"
+import "github.com/specgen-io/specgen-golang/v2/goven/golang.org/x/exp/constraints"
 
 // Equal reports whether two slices are equal: the same length and all
 // elements equal. If the lengths are different, Equal returns false.

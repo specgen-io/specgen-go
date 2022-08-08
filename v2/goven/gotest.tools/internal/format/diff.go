@@ -6,7 +6,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/specgen-io/specgen-go/v2/goven/gotest.tools/internal/difflib"
+	"github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/difflib"
 )
 
 const (

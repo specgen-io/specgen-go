@@ -9,8 +9,8 @@ import (
 	"reflect"
 	"strings"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp/internal/flags"
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp/internal/value"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp/internal/flags"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp/internal/value"
 )
 
 const (

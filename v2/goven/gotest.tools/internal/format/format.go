@@ -1,4 +1,4 @@
-package format // import "github.com/specgen-io/specgen-go/v2/goven/gotest.tools/internal/format"
+package format // import "github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/format"
 
 import "fmt"
 

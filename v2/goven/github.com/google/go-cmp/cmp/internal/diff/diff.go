@@ -16,7 +16,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/google/go-cmp/cmp/internal/flags"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/google/go-cmp/cmp/internal/flags"
 )
 
 // EditType represents a single operation within an edit-script.

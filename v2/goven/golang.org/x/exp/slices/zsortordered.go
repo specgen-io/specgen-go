@@ -6,7 +6,7 @@
 
 package slices
 
-import "github.com/specgen-io/specgen-go/v2/goven/golang.org/x/exp/constraints"
+import "github.com/specgen-io/specgen-golang/v2/goven/golang.org/x/exp/constraints"
 
 // insertionSortOrdered sorts data[a:b] using insertion sort.
 func insertionSortOrdered[E constraints.Ordered](data []E, a, b int) {

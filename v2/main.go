@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/generator/v2"
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/specgen-io/specgen/generator/v2/console"
-	"github.com/specgen-io/specgen-go/v2/generators"
-	"github.com/specgen-io/specgen-go/v2/goven/github.com/spf13/cobra"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2/console"
+	"github.com/specgen-io/specgen-golang/v2/generators"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/cobra"
 	"os"
 )
 

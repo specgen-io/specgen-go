@@ -46,7 +46,7 @@ function __%[1]s_perform_completion
 
     # Some programs may output extra empty lines after the directive.
     # Let's ignore them or else it will break completion.
-    # Ref: https://github.com/specgen-io/specgen-go/v2/goven/github.com/spf13/cobra/issues/1279
+    # Ref: https://github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/cobra/issues/1279
     for line in $results[-1..1]
         if test (string trim -- $line) = ""
             # Found an empty line, remove it
