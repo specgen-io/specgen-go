@@ -7,13 +7,13 @@ import (
 )
 
 type Response struct {
-	Name	Name
+	Name Name
 	Definition
 }
 
 type OperationResponse struct {
 	Response
-	Operation	*NamedOperation
+	Operation *NamedOperation
 }
 
 type OperationResponses []OperationResponse

@@ -47,10 +47,10 @@ func buildModelsMap(models Models) ModelsMap {
 }
 
 type enricher struct {
-	ModelsMap	ModelsMap
-	ProcessedModels	map[string]interface{}
-	Messages	*Messages
-	ResolvedModels	[]*NamedModel
+	ModelsMap       ModelsMap
+	ProcessedModels map[string]interface{}
+	Messages        *Messages
+	ResolvedModels  []*NamedModel
 }
 
 func (enricher *enricher) processedModels(name string) bool {

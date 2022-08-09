@@ -7,11 +7,11 @@ import (
 )
 
 type ReadSpecificationCase struct {
-	name		string
-	specification	string
-	err		error
-	messages	[]Message
-	check		func(t *testing.T, spec *Spec)
+	name          string
+	specification string
+	err           error
+	messages      []Message
+	check         func(t *testing.T, spec *Spec)
 }
 
 func assertMessages(t *testing.T, expected []Message, messages *Messages) {

@@ -1,3 +1,7 @@
+// Copyright 2020, The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 package value
 
 import (
@@ -7,16 +11,23 @@ import (
 
 var anyType = reflect.TypeOf((*interface{})(nil)).Elem()
 
+// TypeString is nearly identical to reflect.Type.String,
+// but has an additional option to specify that full type names be used.
 func TypeString(t reflect.Type, qualified bool) string {
 	return string(appendTypeName(nil, t, qualified, false))
 }
 
 func appendTypeName(b []byte, t reflect.Type, qualified, elideFunc bool) []byte {
+	// BUG: Go reflection provides no way to disambiguate two named types
+	// of the same name and within the same package,
+	// but declared within the namespace of different functions.
 
+	// Use the "any" alias instead of "interface{}" for better readability.
 	if t == anyType {
 		return append(b, "any"...)
 	}
 
+	// Named type.
 	if t.Name() != "" {
 		if qualified && t.PkgPath() != "" {
 			b = append(b, '"')
@@ -30,6 +41,7 @@ func appendTypeName(b []byte, t reflect.Type, qualified, elideFunc bool) []byte 
 		return b
 	}
 
+	// Unnamed type.
 	switch k := t.Kind(); k {
 	case reflect.Bool, reflect.String, reflect.UnsafePointer,
 		reflect.Int, reflect.Int8, reflect.Int16, reflect.Int32, reflect.Int64,
@@ -65,7 +77,7 @@ func appendTypeName(b []byte, t reflect.Type, qualified, elideFunc bool) []byte 
 		b = append(b, ')')
 		switch t.NumOut() {
 		case 0:
-
+			// Do nothing
 		case 1:
 			b = append(b, ' ')
 			b = appendTypeName(b, t.Out(0), qualified, false)

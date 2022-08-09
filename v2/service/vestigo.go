@@ -4,14 +4,14 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
 	"github.com/specgen-io/specgen-golang/v2/client"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
 	"github.com/specgen-io/specgen-golang/v2/imports"
 	"github.com/specgen-io/specgen-golang/v2/models"
 	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
 )
 
 func generateRoutings(version *spec.Version, versionModule module.Module, modelsModule module.Module) []generator.CodeFile {
@@ -76,8 +76,8 @@ func generateRouting(modelsModule module.Module, versionModule module.Module, ap
 	w.Line(`}`)
 
 	return &generator.CodeFile{
-		Path:		versionModule.GetPath(fmt.Sprintf("%s_routing.go", api.Name.SnakeCase())),
-		Content:	w.String(),
+		Path:    versionModule.GetPath(fmt.Sprintf("%s_routing.go", api.Name.SnakeCase())),
+		Content: w.String(),
 	}
 }
 
@@ -317,8 +317,8 @@ func generateSpecRouting(specification *spec.Spec, module module.Module) *genera
 	w.Line(`}`)
 
 	return &generator.CodeFile{
-		Path:		module.GetPath("spec_routing.go"),
-		Content:	w.String(),
+		Path:    module.GetPath("spec_routing.go"),
+		Content: w.String(),
 	}
 }
 

@@ -9,7 +9,7 @@ import (
 )
 
 func genFishComp(buf io.StringWriter, name string, includeDesc bool) {
-
+	// Variables should not contain a '-' or ':' character
 	nameForVar := name
 	nameForVar = strings.ReplaceAll(nameForVar, "-", "_")
 	nameForVar = strings.ReplaceAll(nameForVar, ":", "_")
@@ -200,6 +200,7 @@ complete -c %[2]s -n '__%[1]s_prepare_completions' -f -a '$__%[1]s_comp_results'
 		ShellCompDirectiveFilterFileExt, ShellCompDirectiveFilterDirs, activeHelpEnvVar(name)))
 }
 
+// GenFishCompletion generates fish completion file and writes to the passed writer.
 func (c *Command) GenFishCompletion(w io.Writer, includeDesc bool) error {
 	buf := new(bytes.Buffer)
 	genFishComp(buf, c.Name(), includeDesc)
@@ -207,6 +208,7 @@ func (c *Command) GenFishCompletion(w io.Writer, includeDesc bool) error {
 	return err
 }
 
+// GenFishCompletionFile generates fish completion file.
 func (c *Command) GenFishCompletionFile(filename string, includeDesc bool) error {
 	outFile, err := os.Create(filename)
 	if err != nil {

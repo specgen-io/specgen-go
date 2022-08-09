@@ -9,13 +9,14 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/source"
 )
 
+// Result of a Comparison.
 type Result interface {
 	Success() bool
 }
 
 type result struct {
-	success	bool
-	message	string
+	success bool
+	message string
 }
 
 func (r result) Success() bool {
@@ -26,12 +27,17 @@ func (r result) FailureMessage() string {
 	return r.message
 }
 
+// ResultSuccess is a constant which is returned by a ComparisonWithResult to
+// indicate success.
 var ResultSuccess = result{success: true}
 
+// ResultFailure returns a failed Result with a failure message.
 func ResultFailure(message string) Result {
 	return result{message: message}
 }
 
+// ResultFromError returns ResultSuccess if err is nil. Otherwise ResultFailure
+// is returned with the error message as the failure message.
 func ResultFromError(err error) Result {
 	if err == nil {
 		return ResultSuccess
@@ -40,9 +46,9 @@ func ResultFromError(err error) Result {
 }
 
 type templatedResult struct {
-	success		bool
-	template	string
-	data		map[string]interface{}
+	success  bool
+	template string
+	data     map[string]interface{}
 }
 
 func (r templatedResult) Success() bool {
@@ -57,13 +63,17 @@ func (r templatedResult) FailureMessage(args []ast.Expr) string {
 	return msg
 }
 
+// ResultFailureTemplate returns a Result with a template string and data which
+// can be used to format a failure message. The template may access data from .Data,
+// the comparison args with the callArg function, and the formatNode function may
+// be used to format the call args.
 func ResultFailureTemplate(template string, data map[string]interface{}) Result {
 	return templatedResult{template: template, data: data}
 }
 
 func renderMessage(result templatedResult, args []ast.Expr) (string, error) {
 	tmpl := template.New("failure").Funcs(template.FuncMap{
-		"formatNode":	source.FormatNode,
+		"formatNode": source.FormatNode,
 		"callArg": func(index int) ast.Expr {
 			if index >= len(args) {
 				return nil

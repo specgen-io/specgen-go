@@ -26,7 +26,7 @@ func runComparison(
 	var message string
 	switch typed := result.(type) {
 	case resultWithComparisonArgs:
-		const stackIndex = 3
+		const stackIndex = 3 // Assert/Check, assert, runComparison
 		args, err := source.CallExprArgs(stackIndex)
 		if err != nil {
 			t.Log(err.Error())
@@ -50,6 +50,14 @@ type resultBasic interface {
 	FailureMessage() string
 }
 
+// filterPrintableExpr filters the ast.Expr slice to only include Expr that are
+// easy to read when printed and contain relevant information to an assertion.
+//
+// Ident and SelectorExpr are included because they print nicely and the variable
+// names may provide additional context to their values.
+// BasicLit and CompositeLit are excluded because their source is equivalent to
+// their value, which is already available.
+// Other types are ignored for now, but could be added if they are relevant.
 func filterPrintableExpr(args []ast.Expr) []ast.Expr {
 	result := make([]ast.Expr, len(args))
 	for i, arg := range args {
@@ -73,7 +81,7 @@ func isShortPrintableExpr(expr ast.Expr) bool {
 	case *ast.BinaryExpr, *ast.UnaryExpr:
 		return true
 	default:
-
+		// CallExpr, ParenExpr, TypeAssertExpr, KeyValueExpr, StarExpr
 		return false
 	}
 }

@@ -1,14 +1,14 @@
 package service
 
 import (
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
 	"github.com/specgen-io/specgen-golang/v2/common"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
 	"github.com/specgen-io/specgen-golang/v2/imports"
 	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/responses"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
 )
 
 func generateServiceInterfaces(version *spec.Version, versionModule, modelsModule, emptyModule module.Module) []generator.CodeFile {
@@ -31,7 +31,7 @@ func generateServiceInterface(api *spec.Api, apiModule, modelsModule, emptyModul
 			imports.Add(emptyModule.Package)
 		}
 	}
-
+	//TODO - potential bug, could be unused import
 	imports.Add(modelsModule.Package)
 	imports.Write(w)
 
@@ -48,8 +48,8 @@ func generateServiceInterface(api *spec.Api, apiModule, modelsModule, emptyModul
 	}
 	w.Line(`}`)
 	return &generator.CodeFile{
-		Path:		apiModule.GetPath("service.go"),
-		Content:	w.String(),
+		Path:    apiModule.GetPath("service.go"),
+		Content: w.String(),
 	}
 }
 

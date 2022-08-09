@@ -1,3 +1,7 @@
+// Copyright 2017, The Go Authors. All rights reserved.
+// Use of this source code is governed by a BSD-style
+// license that can be found in the LICENSE file.
+
 package value
 
 import (
@@ -5,6 +9,8 @@ import (
 	"reflect"
 )
 
+// IsZero reports whether v is the zero value.
+// This does not rely on Interface and so can be used on unexported fields.
 func IsZero(v reflect.Value) bool {
 	switch v.Kind() {
 	case reflect.Bool:

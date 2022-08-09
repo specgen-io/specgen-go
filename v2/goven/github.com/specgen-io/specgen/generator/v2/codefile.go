@@ -7,8 +7,8 @@ import (
 )
 
 type CodeFile struct {
-	Path	string
-	Content	string
+	Path    string
+	Content string
 }
 
 func exists(path string) bool {

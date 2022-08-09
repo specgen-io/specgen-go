@@ -6,7 +6,7 @@ import (
 )
 
 type NamedDefinition struct {
-	Name	Name
+	Name Name
 	Definition
 }
 

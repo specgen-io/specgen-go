@@ -13,13 +13,16 @@ const (
 	contextLines = 2
 )
 
+// DiffConfig for a unified diff
 type DiffConfig struct {
-	A	string
-	B	string
-	From	string
-	To	string
+	A    string
+	B    string
+	From string
+	To   string
 }
 
+// UnifiedDiff is a modified version of difflib.WriteUnifiedDiff with better
+// support for showing the whitespace differences.
 func UnifiedDiff(conf DiffConfig) string {
 	a := strings.SplitAfter(conf.A, "\n")
 	b := strings.SplitAfter(conf.B, "\n")
@@ -59,6 +62,8 @@ func UnifiedDiff(conf DiffConfig) string {
 	return buf.String()
 }
 
+// hasWhitespaceDiffLines returns true if any diff groups is only different
+// because of whitespace characters.
 func hasWhitespaceDiffLines(groups [][]difflib.OpCode, a, b []string) bool {
 	for _, group := range groups {
 		in, out := new(bytes.Buffer), new(bytes.Buffer)
@@ -130,15 +135,16 @@ func formatRangeLine(wf func(string, ...interface{}), group []difflib.OpCode) {
 	wf("@@ -%s +%s @@\n", range1, range2)
 }
 
+// Convert range to the "ed" format
 func formatRangeUnified(start, stop int) string {
-
-	beginning := start + 1
+	// Per the diff spec at http://www.unix.org/single_unix_specification/
+	beginning := start + 1 // lines start numbering with one
 	length := stop - start
 	if length == 1 {
 		return fmt.Sprintf("%d", beginning)
 	}
 	if length == 0 {
-		beginning--
+		beginning-- // empty ranges begin at line just before the range
 	}
 	return fmt.Sprintf("%d,%d", beginning, length)
 }
@@ -147,7 +153,8 @@ func formatLines(writeLine func(string, string), prefix string, lines []string) 
 	for _, line := range lines {
 		writeLine(prefix, line)
 	}
-
+	// Add a newline if the last line is missing one so that the diff displays
+	// properly.
 	if !strings.HasSuffix(lines[len(lines)-1], "\n") {
 		writeLine("", "\n")
 	}

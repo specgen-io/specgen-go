@@ -6,8 +6,8 @@ import (
 )
 
 type Name struct {
-	Source		string
-	Location	*yaml.Node
+	Source   string
+	Location *yaml.Node
 }
 
 func (value *Name) UnmarshalYAML(node *yaml.Node) error {

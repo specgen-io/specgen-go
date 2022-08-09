@@ -6,10 +6,10 @@ import (
 )
 
 type DefinitionDefault struct {
-	Type		Type
-	Default		*string
-	Description	*string
-	Location	*yaml.Node
+	Type        Type
+	Default     *string
+	Description *string
+	Location    *yaml.Node
 }
 
 func parseDefaultedType(str string) (string, *string) {
@@ -33,10 +33,10 @@ func (value *DefinitionDefault) UnmarshalYAML(node *yaml.Node) error {
 		return yamlError(node, err.Error())
 	}
 	internal := DefinitionDefault{
-		Type:		Type{*typ, node},
-		Default:	defaultValue,
-		Description:	getDescriptionFromComment(node),
-		Location:	node,
+		Type:        Type{*typ, node},
+		Default:     defaultValue,
+		Description: getDescriptionFromComment(node),
+		Location:    node,
 	}
 	*value = internal
 	return nil
@@ -48,8 +48,8 @@ func (value DefinitionDefault) MarshalYAML() (interface{}, error) {
 		yamlValue = yamlValue + " = " + *value.Default
 	}
 	node := yaml.Node{
-		Kind:	yaml.ScalarNode,
-		Value:	yamlValue,
+		Kind:  yaml.ScalarNode,
+		Value: yamlValue,
 	}
 	if value.Description != nil {
 		node.LineComment = "# " + *value.Description
@@ -58,9 +58,9 @@ func (value DefinitionDefault) MarshalYAML() (interface{}, error) {
 }
 
 type Definition struct {
-	Type		Type
-	Description	*string
-	Location	*yaml.Node
+	Type        Type
+	Description *string
+	Location    *yaml.Node
 }
 
 func (value *Definition) UnmarshalYAML(node *yaml.Node) error {
@@ -72,9 +72,9 @@ func (value *Definition) UnmarshalYAML(node *yaml.Node) error {
 		return yamlError(node, err.Error())
 	}
 	parsed := Definition{
-		Type:		Type{*typ, node},
-		Description:	getDescriptionFromComment(node),
-		Location:	node,
+		Type:        Type{*typ, node},
+		Description: getDescriptionFromComment(node),
+		Location:    node,
 	}
 	*value = parsed
 	return nil
@@ -83,8 +83,8 @@ func (value *Definition) UnmarshalYAML(node *yaml.Node) error {
 func (value Definition) MarshalYAML() (interface{}, error) {
 	yamlValue := value.Type.Definition.String()
 	node := yaml.Node{
-		Kind:	yaml.ScalarNode,
-		Value:	yamlValue,
+		Kind:  yaml.ScalarNode,
+		Value: yamlValue,
 	}
 	if value.Description != nil {
 		node.LineComment = "# " + *value.Description
@@ -95,9 +95,9 @@ func (value Definition) MarshalYAML() (interface{}, error) {
 type BodyKind string
 
 const (
-	BodyEmpty	BodyKind	= "empty"
-	BodyString	BodyKind	= "string"
-	BodyJson	BodyKind	= "json"
+	BodyEmpty  BodyKind = "empty"
+	BodyString BodyKind = "string"
+	BodyJson   BodyKind = "json"
 )
 
 func kindOf(definition *Definition) BodyKind {

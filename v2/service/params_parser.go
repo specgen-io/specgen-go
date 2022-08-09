@@ -5,9 +5,9 @@ import (
 	"strings"
 
 	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
 	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
 )
 
 func parserDefaultName(param *spec.NamedParam) (string, *string) {
@@ -65,9 +65,9 @@ func parserMethodNamePlain(typ *spec.TypeDef) string {
 
 func generateParamsParser(module module.Module, models module.Module) *generator.CodeFile {
 	data := struct {
-		PackageName	string
-		ModelsPackage	string
-		ValidationError	string
+		PackageName     string
+		ModelsPackage   string
+		ValidationError string
 	}{
 		module.Name,
 		models.Package,

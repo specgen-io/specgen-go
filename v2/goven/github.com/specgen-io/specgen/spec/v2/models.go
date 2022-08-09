@@ -7,17 +7,17 @@ import (
 )
 
 type Model struct {
-	Object		*Object
-	Enum		*Enum
-	OneOf		*OneOf
-	Description	*string
-	Location	*yaml.Node
+	Object      *Object
+	Enum        *Enum
+	OneOf       *OneOf
+	Description *string
+	Location    *yaml.Node
 }
 
 type NamedModel struct {
-	Name	Name
+	Name Name
 	Model
-	Version	*Version
+	Version *Version
 }
 
 type Models []NamedModel

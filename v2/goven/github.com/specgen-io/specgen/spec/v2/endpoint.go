@@ -9,15 +9,15 @@ import (
 )
 
 type UrlPart struct {
-	Part	string
-	Param	*NamedParam
+	Part  string
+	Param *NamedParam
 }
 
 type Endpoint struct {
-	Method		string
-	Url		string
-	UrlParams	UrlParams
-	UrlParts	[]UrlPart
+	Method    string
+	Url       string
+	UrlParams UrlParams
+	UrlParts  []UrlPart
 }
 
 func (value Endpoint) MarshalYAML() (interface{}, error) {
@@ -74,10 +74,10 @@ func parseUrlParam(paramStr string, node *yaml.Node) (*NamedParam, error) {
 	}
 
 	return &NamedParam{
-		Name:	Name{Source: paramName, Location: node},
+		Name: Name{Source: paramName, Location: node},
 		DefinitionDefault: DefinitionDefault{
-			Type:		Type{*typ, node},
-			Location:	node,
+			Type:     Type{*typ, node},
+			Location: node,
 		},
 	}, nil
 }

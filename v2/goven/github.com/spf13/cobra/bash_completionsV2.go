@@ -351,6 +351,7 @@ fi
 		activeHelpMarker))
 }
 
+// GenBashCompletionFileV2 generates Bash completion version 2.
 func (c *Command) GenBashCompletionFileV2(filename string, includeDesc bool) error {
 	outFile, err := os.Create(filename)
 	if err != nil {
@@ -361,6 +362,8 @@ func (c *Command) GenBashCompletionFileV2(filename string, includeDesc bool) err
 	return c.GenBashCompletionV2(outFile, includeDesc)
 }
 
+// GenBashCompletionV2 generates Bash completion file version 2
+// and writes it to the passed writer.
 func (c *Command) GenBashCompletionV2(w io.Writer, includeDesc bool) error {
 	return c.genBashCompletion(w, includeDesc)
 }

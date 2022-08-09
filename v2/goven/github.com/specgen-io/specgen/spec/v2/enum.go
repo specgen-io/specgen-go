@@ -10,12 +10,12 @@ type Enum struct {
 }
 
 type EnumItem struct {
-	Value		string
-	Description	*string
+	Value       string
+	Description *string
 }
 
 type NamedEnumItem struct {
-	Name	Name
+	Name Name
 	EnumItem
 }
 

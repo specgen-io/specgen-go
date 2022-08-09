@@ -6,10 +6,10 @@ import (
 )
 
 type Module struct {
-	RootModule	string
-	Path		string
-	Package		string
-	Name		string
+	RootModule string
+	Path       string
+	Package    string
+	Name       string
 }
 
 func New(rootModule string, path string) Module {

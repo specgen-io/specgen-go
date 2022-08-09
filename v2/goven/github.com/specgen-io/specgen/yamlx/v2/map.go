@@ -37,8 +37,8 @@ func encodeKeyValue(key interface{}, value interface{}) (*yaml.Node, *yaml.Node,
 }
 
 type Pair struct {
-	Key	interface{}
-	Value	interface{}
+	Key   interface{}
+	Value interface{}
 }
 
 func (yamlMap *YamlMap) AddAll(pairs ...Pair) error {

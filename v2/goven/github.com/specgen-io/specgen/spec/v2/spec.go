@@ -8,26 +8,26 @@ import (
 
 type Spec struct {
 	Meta
-	Versions	[]Version
+	Versions []Version
 }
 
 type VersionSpecification struct {
-	Http	Apis	`yaml:"http"`
-	Models	Models	`yaml:"models"`
+	Http   Apis   `yaml:"http"`
+	Models Models `yaml:"models"`
 }
 
 type Version struct {
-	Version	Name
+	Version Name
 	VersionSpecification
-	ResolvedModels	[]*NamedModel
+	ResolvedModels []*NamedModel
 }
 
 type Meta struct {
-	SpecVersion	string	`yaml:"spec"`
-	Name		Name	`yaml:"name"`
-	Title		*string	`yaml:"title,omitempty"`
-	Description	*string	`yaml:"description,omitempty"`
-	Version		string	`yaml:"version"`
+	SpecVersion string  `yaml:"spec"`
+	Name        Name    `yaml:"name"`
+	Title       *string `yaml:"title,omitempty"`
+	Description *string `yaml:"description,omitempty"`
+	Version     string  `yaml:"version"`
 }
 
 func isVersionNode(node *yaml.Node) bool {

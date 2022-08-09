@@ -3,13 +3,13 @@ package service
 import (
 	"fmt"
 
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
 	"github.com/specgen-io/specgen-golang/v2/common"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
 	"github.com/specgen-io/specgen-golang/v2/imports"
 	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
 )
 
 func generateServiceImplementations(version *spec.Version, versionModule, modelsModule, targetModule module.Module) []generator.CodeFile {
@@ -52,8 +52,8 @@ func generateServiceImplementation(api *spec.Api, apiModule, modelsModule, targe
 	}
 
 	return &generator.CodeFile{
-		Path:		targetModule.GetPath(fmt.Sprintf("%s.go", api.Name.SnakeCase())),
-		Content:	w.String(),
+		Path:    targetModule.GetPath(fmt.Sprintf("%s.go", api.Name.SnakeCase())),
+		Content: w.String(),
 	}
 }
 

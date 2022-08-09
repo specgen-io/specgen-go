@@ -7,13 +7,13 @@ import (
 )
 
 type operation struct {
-	Endpoint	Endpoint		`yaml:"endpoint"`
-	Description	*string			`yaml:"description,omitempty"`
-	HeaderParams	HeaderParams		`yaml:"header,omitempty"`
-	QueryParams	QueryParams		`yaml:"query,omitempty"`
-	Body		*Definition		`yaml:"body,omitempty"`
-	Responses	OperationResponses	`yaml:"response"`
-	Location	*yaml.Node
+	Endpoint     Endpoint           `yaml:"endpoint"`
+	Description  *string            `yaml:"description,omitempty"`
+	HeaderParams HeaderParams       `yaml:"header,omitempty"`
+	QueryParams  QueryParams        `yaml:"query,omitempty"`
+	Body         *Definition        `yaml:"body,omitempty"`
+	Responses    OperationResponses `yaml:"response"`
+	Location     *yaml.Node
 }
 
 type Operation operation
@@ -70,9 +70,9 @@ func (value Operation) MarshalYAML() (interface{}, error) {
 }
 
 type NamedOperation struct {
-	Name	Name
+	Name Name
 	Operation
-	Api	*Api
+	Api *Api
 }
 
 func (op *NamedOperation) FullUrl() string {

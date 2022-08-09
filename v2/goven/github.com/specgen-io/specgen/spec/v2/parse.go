@@ -6,8 +6,8 @@ import (
 )
 
 type SpecParseResult struct {
-	Spec		*Spec
-	Messages	Messages
+	Spec     *Spec
+	Messages Messages
 }
 
 func ReadSpec(data []byte) (*Spec, *Messages, error) {

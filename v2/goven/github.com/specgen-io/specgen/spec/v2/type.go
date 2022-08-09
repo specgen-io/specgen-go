@@ -10,18 +10,18 @@ import (
 type TypeNode int
 
 const (
-	PlainType	TypeNode	= 0
-	NullableType	TypeNode	= 1
-	ArrayType	TypeNode	= 2
-	MapType		TypeNode	= 3
+	PlainType    TypeNode = 0
+	NullableType TypeNode = 1
+	ArrayType    TypeNode = 2
+	MapType      TypeNode = 3
 )
 
 type TypeDef struct {
-	Name	string
-	Node	TypeNode
-	Child	*TypeDef
-	Plain	string
-	Info	*TypeInfo
+	Name  string
+	Node  TypeNode
+	Child *TypeDef
+	Plain string
+	Info  *TypeInfo
 }
 
 func Plain(typ string) *TypeDef {
@@ -86,8 +86,8 @@ func parseType(value string) (*TypeDef, error) {
 }
 
 type Type struct {
-	Definition	TypeDef
-	Location	*yaml.Node
+	Definition TypeDef
+	Location   *yaml.Node
 }
 
 func NewType(str string) *Type {
@@ -117,32 +117,32 @@ func (value *Type) UnmarshalYAML(node *yaml.Node) error {
 }
 
 const (
-	TypeInt32	string	= "int32"
-	TypeInt64	string	= "int64"
-	TypeFloat	string	= "float"
-	TypeDouble	string	= "double"
-	TypeDecimal	string	= "decimal"
-	TypeBoolean	string	= "boolean"
-	TypeString	string	= "string"
-	TypeUuid	string	= "uuid"
-	TypeDate	string	= "date"
-	TypeDateTime	string	= "datetime"
-	TypeJson	string	= "json"
-	TypeEmpty	string	= "empty"
+	TypeInt32    string = "int32"
+	TypeInt64    string = "int64"
+	TypeFloat    string = "float"
+	TypeDouble   string = "double"
+	TypeDecimal  string = "decimal"
+	TypeBoolean  string = "boolean"
+	TypeString   string = "string"
+	TypeUuid     string = "uuid"
+	TypeDate     string = "date"
+	TypeDateTime string = "datetime"
+	TypeJson     string = "json"
+	TypeEmpty    string = "empty"
 )
 
 const (
-	TypeAliasInt	string	= "int"
-	TypeAliasLong	string	= "long"
-	TypeAliasBool	string	= "bool"
-	TypeAliasStr	string	= "str"
+	TypeAliasInt  string = "int"
+	TypeAliasLong string = "long"
+	TypeAliasBool string = "bool"
+	TypeAliasStr  string = "str"
 )
 
 var TypesAliases = map[string]string{
-	TypeAliasInt:	TypeInt32,
-	TypeAliasLong:	TypeInt64,
-	TypeAliasBool:	TypeBoolean,
-	TypeAliasStr:	TypeString,
+	TypeAliasInt:  TypeInt32,
+	TypeAliasLong: TypeInt64,
+	TypeAliasBool: TypeBoolean,
+	TypeAliasStr:  TypeString,
 }
 
 func mapTypeAlias(value string) string {
@@ -155,31 +155,31 @@ func mapTypeAlias(value string) string {
 type TypeStructure int
 
 const (
-	StructureNone	TypeStructure	= 0
-	StructureScalar	TypeStructure	= 1
-	StructureArray	TypeStructure	= 2
-	StructureObject	TypeStructure	= 3
+	StructureNone   TypeStructure = 0
+	StructureScalar TypeStructure = 1
+	StructureArray  TypeStructure = 2
+	StructureObject TypeStructure = 3
 )
 
 type TypeInfo struct {
-	Structure	TypeStructure
-	Defaultable	bool
-	Model		*NamedModel
+	Structure   TypeStructure
+	Defaultable bool
+	Model       *NamedModel
 }
 
 var Types = map[string]TypeInfo{
-	TypeInt32:	{StructureScalar, true, nil},
-	TypeInt64:	{StructureScalar, true, nil},
-	TypeFloat:	{StructureScalar, true, nil},
-	TypeDouble:	{StructureScalar, true, nil},
-	TypeDecimal:	{StructureScalar, true, nil},
-	TypeBoolean:	{StructureScalar, true, nil},
-	TypeString:	{StructureScalar, true, nil},
-	TypeUuid:	{StructureScalar, true, nil},
-	TypeDate:	{StructureScalar, true, nil},
-	TypeDateTime:	{StructureScalar, true, nil},
-	TypeJson:	{StructureObject, false, nil},
-	TypeEmpty:	{StructureNone, false, nil},
+	TypeInt32:    {StructureScalar, true, nil},
+	TypeInt64:    {StructureScalar, true, nil},
+	TypeFloat:    {StructureScalar, true, nil},
+	TypeDouble:   {StructureScalar, true, nil},
+	TypeDecimal:  {StructureScalar, true, nil},
+	TypeBoolean:  {StructureScalar, true, nil},
+	TypeString:   {StructureScalar, true, nil},
+	TypeUuid:     {StructureScalar, true, nil},
+	TypeDate:     {StructureScalar, true, nil},
+	TypeDateTime: {StructureScalar, true, nil},
+	TypeJson:     {StructureObject, false, nil},
+	TypeEmpty:    {StructureNone, false, nil},
 }
 
 func ModelTypeInfo(model *NamedModel) *TypeInfo {
