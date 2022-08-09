@@ -11,12 +11,11 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/pflag"
 )
 
-// Annotations for Bash completion.
 const (
-	BashCompFilenameExt     = "cobra_annotation_bash_completion_filename_extensions"
-	BashCompCustom          = "cobra_annotation_bash_completion_custom"
-	BashCompOneRequiredFlag = "cobra_annotation_bash_completion_one_required_flag"
-	BashCompSubdirsInDir    = "cobra_annotation_bash_completion_subdirs_in_dir"
+	BashCompFilenameExt	= "cobra_annotation_bash_completion_filename_extensions"
+	BashCompCustom		= "cobra_annotation_bash_completion_custom"
+	BashCompOneRequiredFlag	= "cobra_annotation_bash_completion_one_required_flag"
+	BashCompSubdirsInDir	= "cobra_annotation_bash_completion_subdirs_in_dir"
 )
 
 func writePreamble(buf io.StringWriter, name string) {
@@ -518,15 +517,11 @@ func writeLocalNonPersistentFlag(buf io.StringWriter, flag *pflag.Flag) {
 	}
 }
 
-// Setup annotations for go completions for registered flags
 func prepareCustomAnnotationsForFlags(cmd *Command) {
 	flagCompletionMutex.RLock()
 	defer flagCompletionMutex.RUnlock()
 	for flag := range flagCompletionFunctions {
-		// Make sure the completion script calls the __*_go_custom_completion function for
-		// every registered flag.  We need to do this here (and not when the flag was registered
-		// for completion) so that we can know the root command name for the prefix
-		// of __<prefix>_go_custom_completion
+
 		if flag.Annotations == nil {
 			flag.Annotations = map[string][]string{}
 		}
@@ -557,8 +552,7 @@ func writeFlags(buf io.StringWriter, cmd *Command) {
 		if len(flag.Shorthand) > 0 {
 			writeShortFlag(buf, flag, cmd)
 		}
-		// localNonPersistentFlags are used to stop the completion of subcommands when one is set
-		// if TraverseChildren is true we should allow to complete subcommands
+
 		if localNonPersistentFlags.Lookup(flag.Name) != nil && !cmd.Root().TraverseChildren {
 			writeLocalNonPersistentFlag(buf, flag)
 		}
@@ -605,8 +599,7 @@ func writeRequiredNouns(buf io.StringWriter, cmd *Command) {
 	WriteStringAndCheck(buf, "    must_have_one_noun=()\n")
 	sort.Strings(cmd.ValidArgs)
 	for _, value := range cmd.ValidArgs {
-		// Remove any description that may be included following a tab character.
-		// Descriptions are not supported by bash completion.
+
 		value = strings.Split(value, "\t")[0]
 		WriteStringAndCheck(buf, fmt.Sprintf("    must_have_one_noun+=(%q)\n", value))
 	}
@@ -668,7 +661,6 @@ func gen(buf io.StringWriter, cmd *Command) {
 	WriteStringAndCheck(buf, "}\n\n")
 }
 
-// GenBashCompletion generates bash completion file and writes to the passed writer.
 func (c *Command) GenBashCompletion(w io.Writer) error {
 	buf := new(bytes.Buffer)
 	writePreamble(buf, c.Name())
@@ -686,7 +678,6 @@ func nonCompletableFlag(flag *pflag.Flag) bool {
 	return flag.Hidden || len(flag.Deprecated) > 0
 }
 
-// GenBashCompletionFile generates bash completion file.
 func (c *Command) GenBashCompletionFile(filename string) error {
 	outFile, err := os.Create(filename)
 	if err != nil {

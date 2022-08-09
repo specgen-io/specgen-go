@@ -1,4 +1,4 @@
-package source // import "github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/source"
+package source
 
 import (
 	"bytes"
@@ -17,8 +17,6 @@ import (
 
 const baseStackIndex = 1
 
-// FormattedCallExprArg returns the argument from an ast.CallExpr at the
-// index in the call stack. The argument is formatted using FormatNode.
 func FormattedCallExprArg(stackIndex int, argPos int) (string, error) {
 	args, err := CallExprArgs(stackIndex + 1)
 	if err != nil {
@@ -30,8 +28,6 @@ func FormattedCallExprArg(stackIndex int, argPos int) (string, error) {
 	return FormatNode(args[argPos])
 }
 
-// CallExprArgs returns the ast.Expr slice for the args of an ast.CallExpr at
-// the index in the call stack.
 func CallExprArgs(stackIndex int) ([]ast.Expr, error) {
 	_, filename, lineNum, ok := runtime.Caller(baseStackIndex + stackIndex)
 	if !ok {
@@ -83,8 +79,6 @@ func scanToLine(fileset *token.FileSet, node ast.Node, lineNum int) ast.Node {
 	return matchedNode
 }
 
-// In golang 1.9 the line number changed from being the line where the statement
-// ended to the line where the statement began.
 func nodePosition(fileset *token.FileSet, node ast.Node) token.Position {
 	if goVersionBefore19 {
 		return fileset.Position(node.End())
@@ -94,7 +88,7 @@ func nodePosition(fileset *token.FileSet, node ast.Node) token.Position {
 
 var goVersionBefore19 = func() bool {
 	version := runtime.Version()
-	// not a release version
+
 	if !strings.HasPrefix(version, "go") {
 		return false
 	}
@@ -138,7 +132,6 @@ func (v *callExprVisitor) Visit(node ast.Node) ast.Visitor {
 	return v
 }
 
-// FormatNode using go/format.Node and return the result as a string
 func FormatNode(node ast.Node) (string, error) {
 	buf := new(bytes.Buffer)
 	err := format.Node(buf, token.NewFileSet(), node)

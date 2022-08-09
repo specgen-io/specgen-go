@@ -19,8 +19,8 @@ func AddCobraCommands(parent *cobra.Command, generators []Generator) {
 
 func generatorCommand(g *Generator) *cobra.Command {
 	command := &cobra.Command{
-		Use:   g.Name,
-		Short: g.Usage,
+		Use:	g.Name,
+		Short:	g.Usage,
 		Run: func(cmd *cobra.Command, args []string) {
 			params := GeneratorArgsValues{}
 			for _, arg := range g.Args {

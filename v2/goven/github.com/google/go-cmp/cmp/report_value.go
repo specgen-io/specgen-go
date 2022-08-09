@@ -1,53 +1,37 @@
-// Copyright 2019, The Go Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 package cmp
 
 import "reflect"
 
-// valueNode represents a single node within a report, which is a
-// structured representation of the value tree, containing information
-// regarding which nodes are equal or not.
 type valueNode struct {
-	parent *valueNode
+	parent	*valueNode
 
-	Type   reflect.Type
-	ValueX reflect.Value
-	ValueY reflect.Value
+	Type	reflect.Type
+	ValueX	reflect.Value
+	ValueY	reflect.Value
 
-	// NumSame is the number of leaf nodes that are equal.
-	// All descendants are equal only if NumDiff is 0.
-	NumSame int
-	// NumDiff is the number of leaf nodes that are not equal.
-	NumDiff int
-	// NumIgnored is the number of leaf nodes that are ignored.
-	NumIgnored int
-	// NumCompared is the number of leaf nodes that were compared
-	// using an Equal method or Comparer function.
-	NumCompared int
-	// NumTransformed is the number of non-leaf nodes that were transformed.
-	NumTransformed int
-	// NumChildren is the number of transitive descendants of this node.
-	// This counts from zero; thus, leaf nodes have no descendants.
-	NumChildren int
-	// MaxDepth is the maximum depth of the tree. This counts from zero;
-	// thus, leaf nodes have a depth of zero.
-	MaxDepth int
+	NumSame	int
 
-	// Records is a list of struct fields, slice elements, or map entries.
-	Records []reportRecord // If populated, implies Value is not populated
+	NumDiff	int
 
-	// Value is the result of a transformation, pointer indirect, of
-	// type assertion.
-	Value *valueNode // If populated, implies Records is not populated
+	NumIgnored	int
 
-	// TransformerName is the name of the transformer.
-	TransformerName string // If non-empty, implies Value is populated
+	NumCompared	int
+
+	NumTransformed	int
+
+	NumChildren	int
+
+	MaxDepth	int
+
+	Records	[]reportRecord
+
+	Value	*valueNode
+
+	TransformerName	string
 }
 type reportRecord struct {
-	Key   reflect.Value // Invalid for slice element
-	Value *valueNode
+	Key	reflect.Value
+	Value	*valueNode
 }
 
 func (parent *valueNode) PushStep(ps PathStep) (child *valueNode) {
@@ -75,13 +59,13 @@ func (parent *valueNode) PushStep(ps PathStep) (child *valueNode) {
 		parent.TransformerName = s.Name()
 		parent.NumTransformed++
 	default:
-		assert(parent == nil) // Must be the root step
+		assert(parent == nil)
 	}
 	return child
 }
 
 func (r *valueNode) Report(rs Result) {
-	assert(r.MaxDepth == 0) // May only be called on leaf nodes
+	assert(r.MaxDepth == 0)
 
 	if rs.ByIgnore() {
 		r.NumIgnored++

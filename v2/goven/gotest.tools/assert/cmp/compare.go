@@ -1,5 +1,4 @@
-/*Package cmp provides Comparisons for Assert and Check*/
-package cmp // import "github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert/cmp"
+package cmp
 
 import (
 	"fmt"
@@ -11,17 +10,8 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/format"
 )
 
-// Comparison is a function which compares values and returns ResultSuccess if
-// the actual value matches the expected value. If the values do not match the
-// Result will contain a message about why it failed.
 type Comparison func() Result
 
-// DeepEqual compares two values using google/go-cmp (http://bit.do/go-cmp)
-// and succeeds if the values are equal.
-//
-// The comparison can be customized using comparison Options.
-// Package https://godoc.org/github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert/opt provides some additional
-// commonly used Options.
 func DeepEqual(x, y interface{}, opts ...cmp.Option) Comparison {
 	return func() (result Result) {
 		defer func() {
@@ -59,16 +49,8 @@ func toResult(success bool, msg string) Result {
 	return ResultFailure(msg)
 }
 
-// RegexOrPattern may be either a *regexp.Regexp or a string that is a valid
-// regexp pattern.
 type RegexOrPattern interface{}
 
-// Regexp succeeds if value v matches regular expression re.
-//
-// Example:
-//   assert.Assert(t, cmp.Regexp("^[0-9a-f]{32}$", str))
-//   r := regexp.MustCompile("^[0-9a-f]{32}$")
-//   assert.Assert(t, cmp.Regexp(r, str))
 func Regexp(re RegexOrPattern, v string) Comparison {
 	match := func(re *regexp.Regexp) Result {
 		return toResult(
@@ -92,7 +74,6 @@ func Regexp(re RegexOrPattern, v string) Comparison {
 	}
 }
 
-// Equal succeeds if x == y. See assert.Equal for full documentation.
 func Equal(x, y interface{}) Comparison {
 	return func() Result {
 		switch {
@@ -134,7 +115,6 @@ func multiLineDiffResult(diff string) Result {
 		map[string]interface{}{"diff": diff})
 }
 
-// Len succeeds if the sequence has the expected length.
 func Len(seq interface{}, expected int) Comparison {
 	return func() (result Result) {
 		defer func() {
@@ -152,14 +132,6 @@ func Len(seq interface{}, expected int) Comparison {
 	}
 }
 
-// Contains succeeds if item is in collection. Collection may be a string, map,
-// slice, or array.
-//
-// If collection is a string, item must also be a string, and is compared using
-// strings.Contains().
-// If collection is a Map, contains will succeed if item is a key in the map.
-// If collection is a slice or array, item is compared to each item in the
-// sequence using reflect.DeepEqual().
 func Contains(collection interface{}, item interface{}) Comparison {
 	return func() Result {
 		colValue := reflect.ValueOf(collection)
@@ -198,7 +170,6 @@ func Contains(collection interface{}, item interface{}) Comparison {
 	}
 }
 
-// Panics succeeds if f() panics.
 func Panics(f func()) Comparison {
 	return func() (result Result) {
 		defer func() {
@@ -211,8 +182,6 @@ func Panics(f func()) Comparison {
 	}
 }
 
-// Error succeeds if err is a non-nil error, and the error message equals the
-// expected message.
 func Error(err error, message string) Comparison {
 	return func() Result {
 		switch {
@@ -226,8 +195,6 @@ func Error(err error, message string) Comparison {
 	}
 }
 
-// ErrorContains succeeds if err is a non-nil error, and the error message contains
-// the expected substring.
 func ErrorContains(err error, substring string) Comparison {
 	return func() Result {
 		switch {
@@ -247,14 +214,10 @@ func formatErrorMessage(err error) string {
 	}); ok {
 		return fmt.Sprintf("%q\n%+v", err, err)
 	}
-	// This error was not wrapped with github.com/specgen-io/specgen-golang/v2/goven/github.com/pkg/errors
+
 	return fmt.Sprintf("%q", err)
 }
 
-// Nil succeeds if obj is a nil interface, pointer, or function.
-//
-// Use NilError() for comparing errors. Use Len(obj, 0) for comparing slices,
-// maps, and channels.
 func Nil(obj interface{}) Comparison {
 	msgFunc := func(value reflect.Value) string {
 		return fmt.Sprintf("%v (type %s) is not nil", reflect.Indirect(value), value.Type())
@@ -280,13 +243,6 @@ func isNil(obj interface{}, msgFunc func(reflect.Value) string) Comparison {
 	}
 }
 
-// ErrorType succeeds if err is not nil and is of the expected type.
-//
-// Expected can be one of:
-// a func(error) bool which returns true if the error is the expected type,
-// an instance of (or a pointer to) a struct of the expected type,
-// a pointer to an interface the error is expected to implement,
-// a reflect.Type of the expected struct or interface.
 func ErrorType(err error, expected interface{}) Comparison {
 	return func() Result {
 		switch expectedType := expected.(type) {

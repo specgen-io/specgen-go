@@ -195,7 +195,7 @@ __%[1]s_handle_completion_types() {
         # Type: menu-complete/menu-complete-backward and insert-completions
         # If the user requested inserting one completion at a time, or all
         # completions at once on the command-line we must remove the descriptions.
-        # https://github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/cobra/issues/1508
+        # https://github.com/spf13/cobra/issues/1508
         local tab=$'\t' comp
         while IFS='' read -r comp; do
             [[ -z $comp ]] && continue
@@ -351,7 +351,6 @@ fi
 		activeHelpMarker))
 }
 
-// GenBashCompletionFileV2 generates Bash completion version 2.
 func (c *Command) GenBashCompletionFileV2(filename string, includeDesc bool) error {
 	outFile, err := os.Create(filename)
 	if err != nil {
@@ -362,8 +361,6 @@ func (c *Command) GenBashCompletionFileV2(filename string, includeDesc bool) err
 	return c.GenBashCompletionV2(outFile, includeDesc)
 }
 
-// GenBashCompletionV2 generates Bash completion file version 2
-// and writes it to the passed writer.
 func (c *Command) GenBashCompletionV2(w io.Writer, includeDesc bool) error {
 	return c.genBashCompletion(w, includeDesc)
 }

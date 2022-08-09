@@ -65,9 +65,9 @@ func parserMethodNamePlain(typ *spec.TypeDef) string {
 
 func generateParamsParser(module module.Module, models module.Module) *generator.CodeFile {
 	data := struct {
-		PackageName     string
-		ModelsPackage   string
-		ValidationError string
+		PackageName	string
+		ModelsPackage	string
+		ValidationError	string
 	}{
 		module.Name,
 		models.Package,

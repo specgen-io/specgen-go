@@ -1,8 +1,7 @@
-package format // import "github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/internal/format"
+package format
 
 import "fmt"
 
-// Message accepts a msgAndArgs varargs and formats it using fmt.Sprintf
 func Message(msgAndArgs ...interface{}) string {
 	switch len(msgAndArgs) {
 	case 0:
@@ -14,7 +13,6 @@ func Message(msgAndArgs ...interface{}) string {
 	}
 }
 
-// WithCustomMessage accepts one or two messages and formats them appropriately
 func WithCustomMessage(source string, msgAndArgs ...interface{}) string {
 	custom := Message(msgAndArgs...)
 	switch {

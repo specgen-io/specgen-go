@@ -52,8 +52,8 @@ func generateServiceImplementation(api *spec.Api, apiModule, modelsModule, targe
 	}
 
 	return &generator.CodeFile{
-		Path:    targetModule.GetPath(fmt.Sprintf("%s.go", api.Name.SnakeCase())),
-		Content: w.String(),
+		Path:		targetModule.GetPath(fmt.Sprintf("%s.go", api.Name.SnakeCase())),
+		Content:	w.String(),
 	}
 }
 

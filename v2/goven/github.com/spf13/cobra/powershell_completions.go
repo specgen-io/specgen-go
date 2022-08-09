@@ -1,6 +1,3 @@
-// The generated scripts require PowerShell v5.0+ (which comes Windows 10, but
-// can be downloaded separately for windows 7 or 8.1).
-
 package cobra
 
 import (
@@ -265,24 +262,18 @@ func (c *Command) genPowerShellCompletionFile(filename string, includeDesc bool)
 	return c.genPowerShellCompletion(outFile, includeDesc)
 }
 
-// GenPowerShellCompletionFile generates powershell completion file without descriptions.
 func (c *Command) GenPowerShellCompletionFile(filename string) error {
 	return c.genPowerShellCompletionFile(filename, false)
 }
 
-// GenPowerShellCompletion generates powershell completion file without descriptions
-// and writes it to the passed writer.
 func (c *Command) GenPowerShellCompletion(w io.Writer) error {
 	return c.genPowerShellCompletion(w, false)
 }
 
-// GenPowerShellCompletionFileWithDesc generates powershell completion file with descriptions.
 func (c *Command) GenPowerShellCompletionFileWithDesc(filename string) error {
 	return c.genPowerShellCompletionFile(filename, true)
 }
 
-// GenPowerShellCompletionWithDesc generates powershell completion file with descriptions
-// and writes it to the passed writer.
 func (c *Command) GenPowerShellCompletionWithDesc(w io.Writer) error {
 	return c.genPowerShellCompletion(w, true)
 }

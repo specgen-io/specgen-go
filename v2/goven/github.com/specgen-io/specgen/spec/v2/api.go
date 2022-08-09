@@ -6,16 +6,16 @@ import (
 )
 
 type Api struct {
-	Name       Name
-	Operations Operations
-	Http       *Apis
+	Name		Name
+	Operations	Operations
+	Http		*Apis
 }
 
 type Apis struct {
-	Url     *string
-	Apis    []Api
-	Errors  Responses
-	Version *Version
+	Url	*string
+	Apis	[]Api
+	Errors	Responses
+	Version	*Version
 }
 
 func (apis *Apis) GetUrl() string {

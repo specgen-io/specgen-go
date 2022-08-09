@@ -31,7 +31,7 @@ func generateServiceInterface(api *spec.Api, apiModule, modelsModule, emptyModul
 			imports.Add(emptyModule.Package)
 		}
 	}
-	//TODO - potential bug, could be unused import
+
 	imports.Add(modelsModule.Package)
 	imports.Write(w)
 
@@ -48,8 +48,8 @@ func generateServiceInterface(api *spec.Api, apiModule, modelsModule, emptyModul
 	}
 	w.Line(`}`)
 	return &generator.CodeFile{
-		Path:    apiModule.GetPath("service.go"),
-		Content: w.String(),
+		Path:		apiModule.GetPath("service.go"),
+		Content:	w.String(),
 	}
 }
 

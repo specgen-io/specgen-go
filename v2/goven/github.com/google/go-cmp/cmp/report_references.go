@@ -1,7 +1,3 @@
-// Copyright 2020, The Go Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style
-// license that can be found in the LICENSE file.
-
 package cmp
 
 import (
@@ -14,15 +10,14 @@ import (
 )
 
 const (
-	pointerDelimPrefix = "⟪"
-	pointerDelimSuffix = "⟫"
+	pointerDelimPrefix	= "⟪"
+	pointerDelimSuffix	= "⟫"
 )
 
-// formatPointer prints the address of the pointer.
 func formatPointer(p value.Pointer, withDelims bool) string {
 	v := p.Uintptr()
 	if flags.Deterministic {
-		v = 0xdeadf00f // Only used for stable testing purposes
+		v = 0xdeadf00f
 	}
 	if withDelims {
 		return pointerDelimPrefix + formatHex(uint64(v)) + pointerDelimSuffix
@@ -30,7 +25,6 @@ func formatPointer(p value.Pointer, withDelims bool) string {
 	return formatHex(uint64(v))
 }
 
-// pointerReferences is a stack of pointers visited so far.
 type pointerReferences [][2]value.Pointer
 
 func (ps *pointerReferences) PushPair(vx, vy reflect.Value, d diffMode, deref bool) (pp [2]value.Pointer) {
@@ -67,16 +61,10 @@ func (ps *pointerReferences) Pop() {
 	*ps = (*ps)[:len(*ps)-1]
 }
 
-// trunkReferences is metadata for a textNode indicating that the sub-tree
-// represents the value for either pointer in a pair of references.
 type trunkReferences struct{ pp [2]value.Pointer }
 
-// trunkReference is metadata for a textNode indicating that the sub-tree
-// represents the value for the given pointer reference.
 type trunkReference struct{ p value.Pointer }
 
-// leafReference is metadata for a textNode indicating that the value is
-// truncated as it refers to another part of the tree (i.e., a trunk).
 type leafReference struct{ p value.Pointer }
 
 func wrapTrunkReferences(pp [2]value.Pointer, s textNode) textNode {
@@ -107,10 +95,6 @@ func makeLeafReference(p value.Pointer, printAddress bool) textNode {
 	return &textWrap{Prefix: prefix, Value: out, Metadata: leafReference{p}}
 }
 
-// resolveReferences walks the textNode tree searching for any leaf reference
-// metadata and resolves each against the corresponding trunk references.
-// Since pointer addresses in memory are not particularly readable to the user,
-// it replaces each pointer value with an arbitrary and unique reference ID.
 func resolveReferences(s textNode) {
 	var walkNodes func(textNode, func(textNode))
 	walkNodes = func(s textNode, f func(textNode)) {
@@ -125,7 +109,6 @@ func resolveReferences(s textNode) {
 		}
 	}
 
-	// Collect all trunks and leaves with reference metadata.
 	var trunks, leaves []*textWrap
 	walkNodes(s, func(s textNode) {
 		if s, ok := s.(*textWrap); ok {
@@ -138,52 +121,44 @@ func resolveReferences(s textNode) {
 		}
 	})
 
-	// No leaf references to resolve.
 	if len(leaves) == 0 {
 		return
 	}
 
-	// Collect the set of all leaf references to resolve.
 	leafPtrs := make(map[value.Pointer]bool)
 	for _, leaf := range leaves {
 		leafPtrs[leaf.Metadata.(leafReference).p] = true
 	}
 
-	// Collect the set of trunk pointers that are always paired together.
-	// This allows us to assign a single ID to both pointers for brevity.
-	// If a pointer in a pair ever occurs by itself or as a different pair,
-	// then the pair is broken.
 	pairedTrunkPtrs := make(map[value.Pointer]value.Pointer)
 	unpair := func(p value.Pointer) {
 		if !pairedTrunkPtrs[p].IsNil() {
-			pairedTrunkPtrs[pairedTrunkPtrs[p]] = value.Pointer{} // invalidate other half
+			pairedTrunkPtrs[pairedTrunkPtrs[p]] = value.Pointer{}
 		}
-		pairedTrunkPtrs[p] = value.Pointer{} // invalidate this half
+		pairedTrunkPtrs[p] = value.Pointer{}
 	}
 	for _, trunk := range trunks {
 		switch p := trunk.Metadata.(type) {
 		case trunkReference:
-			unpair(p.p) // standalone pointer cannot be part of a pair
+			unpair(p.p)
 		case trunkReferences:
 			p0, ok0 := pairedTrunkPtrs[p.pp[0]]
 			p1, ok1 := pairedTrunkPtrs[p.pp[1]]
 			switch {
 			case !ok0 && !ok1:
-				// Register the newly seen pair.
+
 				pairedTrunkPtrs[p.pp[0]] = p.pp[1]
 				pairedTrunkPtrs[p.pp[1]] = p.pp[0]
 			case ok0 && ok1 && p0 == p.pp[1] && p1 == p.pp[0]:
-				// Exact pair already seen; do nothing.
+
 			default:
-				// Pair conflicts with some other pair; break all pairs.
+
 				unpair(p.pp[0])
 				unpair(p.pp[1])
 			}
 		}
 	}
 
-	// Correlate each pointer referenced by leaves to a unique identifier,
-	// and print the IDs for each trunk that matches those pointers.
 	var nextID uint
 	ptrIDs := make(map[value.Pointer]uint)
 	newID := func() uint {
@@ -211,9 +186,9 @@ func resolveReferences(s textNode) {
 				isPair := pairedTrunkPtrs[p.pp[0]] == p.pp[1] && pairedTrunkPtrs[p.pp[1]] == p.pp[0]
 				if isPair {
 					var id uint
-					assert(ok0 == ok1) // must be seen together or not at all
+					assert(ok0 == ok1)
 					if ok0 {
-						assert(id0 == id1) // must have the same ID
+						assert(id0 == id1)
 						id = id0
 					} else {
 						id = newID()
@@ -243,7 +218,6 @@ func resolveReferences(s textNode) {
 		}
 	}
 
-	// Update all leaf references with the unique identifier.
 	for _, leaf := range leaves {
 		if id, ok := ptrIDs[leaf.Metadata.(leafReference).p]; ok {
 			leaf.Prefix = updateReferencePrefix(leaf.Prefix, formatReference(id))

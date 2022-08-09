@@ -11,8 +11,8 @@ import (
 
 func main() {
 	rootCmd := &cobra.Command{
-		Use:   "specgen",
-		Short: "Code generation based on specification",
+		Use:	"specgen",
+		Short:	"Code generation based on specification",
 	}
 	generator.AddCobraCommands(rootCmd, generators.All)
 	cobra.OnInitialize()

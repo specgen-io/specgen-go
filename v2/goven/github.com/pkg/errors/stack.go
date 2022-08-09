@@ -9,17 +9,10 @@ import (
 	"strings"
 )
 
-// Frame represents a program counter inside a stack frame.
-// For historical reasons if Frame is interpreted as a uintptr
-// its value represents the program counter + 1.
 type Frame uintptr
 
-// pc returns the program counter for this frame;
-// multiple frames may have the same PC value.
-func (f Frame) pc() uintptr { return uintptr(f) - 1 }
+func (f Frame) pc() uintptr	{ return uintptr(f) - 1 }
 
-// file returns the full path to the file that contains the
-// function for this Frame's pc.
 func (f Frame) file() string {
 	fn := runtime.FuncForPC(f.pc())
 	if fn == nil {
@@ -29,8 +22,6 @@ func (f Frame) file() string {
 	return file
 }
 
-// line returns the line number of source code of the
-// function for this Frame's pc.
 func (f Frame) line() int {
 	fn := runtime.FuncForPC(f.pc())
 	if fn == nil {
@@ -40,7 +31,6 @@ func (f Frame) line() int {
 	return line
 }
 
-// name returns the name of this function, if known.
 func (f Frame) name() string {
 	fn := runtime.FuncForPC(f.pc())
 	if fn == nil {
@@ -49,18 +39,6 @@ func (f Frame) name() string {
 	return fn.Name()
 }
 
-// Format formats the frame according to the fmt.Formatter interface.
-//
-//    %s    source file
-//    %d    source line
-//    %n    function name
-//    %v    equivalent to %s:%d
-//
-// Format accepts flags that alter the printing of some verbs, as follows:
-//
-//    %+s   function name and path of source file relative to the compile time
-//          GOPATH separated by \n\t (<funcname>\n\t<path>)
-//    %+v   equivalent to %+s:%d
 func (f Frame) Format(s fmt.State, verb rune) {
 	switch verb {
 	case 's':
@@ -83,8 +61,6 @@ func (f Frame) Format(s fmt.State, verb rune) {
 	}
 }
 
-// MarshalText formats a stacktrace Frame as a text string. The output is the
-// same as that of fmt.Sprintf("%+v", f), but without newlines or tabs.
 func (f Frame) MarshalText() ([]byte, error) {
 	name := f.name()
 	if name == "unknown" {
@@ -93,17 +69,8 @@ func (f Frame) MarshalText() ([]byte, error) {
 	return []byte(fmt.Sprintf("%s %s:%d", name, f.file(), f.line())), nil
 }
 
-// StackTrace is stack of Frames from innermost (newest) to outermost (oldest).
 type StackTrace []Frame
 
-// Format formats the stack of Frames according to the fmt.Formatter interface.
-//
-//    %s	lists source files for each Frame in the stack
-//    %v	lists the source file and line number for each Frame in the stack
-//
-// Format accepts flags that alter the printing of some verbs, as follows:
-//
-//    %+v   Prints filename, function, and line number for each Frame in the stack.
 func (st StackTrace) Format(s fmt.State, verb rune) {
 	switch verb {
 	case 'v':
@@ -123,8 +90,6 @@ func (st StackTrace) Format(s fmt.State, verb rune) {
 	}
 }
 
-// formatSlice will format this StackTrace into the given buffer as a slice of
-// Frame, only valid when called with '%s' or '%v'.
 func (st StackTrace) formatSlice(s fmt.State, verb rune) {
 	io.WriteString(s, "[")
 	for i, f := range st {
@@ -136,7 +101,6 @@ func (st StackTrace) formatSlice(s fmt.State, verb rune) {
 	io.WriteString(s, "]")
 }
 
-// stack represents a stack of program counters.
 type stack []uintptr
 
 func (s *stack) Format(st fmt.State, verb rune) {
@@ -168,7 +132,6 @@ func callers() *stack {
 	return &st
 }
 
-// funcname removes the path prefix component of a function's name reported by func.Name().
 func funcname(name string) string {
 	i := strings.LastIndex(name, "/")
 	name = name[i+1:]

@@ -1,4 +1,3 @@
-// Provide convert functions (string => snake_case, chain-case, camelCase, PascalCase).
 package casee
 
 import (
@@ -7,8 +6,6 @@ import (
 	"unicode"
 )
 
-// Convert argument to snake_case style string.
-// If argument is empty, return itself.
 func ToSnakeCase(s string) string {
 	if len(s) == 0 {
 		return s
@@ -18,7 +15,6 @@ func ToSnakeCase(s string) string {
 	return strings.Join(fields, "_")
 }
 
-// If argument is snake_case style string, return true.
 func IsSnakeCase(s string) bool {
 	if strings.Contains(s, "_") {
 		fields := strings.Split(s, "_")
@@ -33,8 +29,6 @@ func IsSnakeCase(s string) bool {
 	}
 }
 
-// Convert argument to chain-case style string.
-// If argument is empty, return itself.
 func ToChainCase(s string) string {
 	if len(s) == 0 {
 		return s
@@ -44,7 +38,6 @@ func ToChainCase(s string) string {
 	return strings.Join(fields, "-")
 }
 
-// If argument is chain-case style string, return true.
 func IsChainCase(s string) bool {
 	if strings.Contains(s, "-") {
 		fields := strings.Split(s, "-")
@@ -59,8 +52,6 @@ func IsChainCase(s string) bool {
 	}
 }
 
-// Convert argument to camelCase style string
-// If argument is empty, return itself
 func ToCamelCase(s string) string {
 	if len(s) == 0 {
 		return s
@@ -75,8 +66,6 @@ func ToCamelCase(s string) string {
 	return strings.Join(fields, "")
 }
 
-// If argument is camelCase style string, return true.
-// If first character is digit, always returns false
 func IsCamelCase(s string) bool {
 	if isFirstRuneDigit(s) {
 		return false
@@ -85,8 +74,6 @@ func IsCamelCase(s string) bool {
 	}
 }
 
-// Convert argument to PascalCase style string
-// If argument is empty, return itself
 func ToPascalCase(s string) string {
 	if len(s) == 0 {
 		return s
@@ -99,8 +86,6 @@ func ToPascalCase(s string) string {
 	return strings.Join(fields, "")
 }
 
-// If argument is PascalCase style string, return true.
-// If first character is digit, always returns false
 func IsPascalCase(s string) bool {
 	if isFirstRuneDigit(s) {
 		return false
@@ -109,8 +94,6 @@ func IsPascalCase(s string) bool {
 	}
 }
 
-// Convert argument to flatcase style string
-// If argument is empty, return itself
 func ToFlatCase(s string) string {
 	if len(s) == 0 {
 		return s
@@ -120,8 +103,6 @@ func ToFlatCase(s string) string {
 	return strings.Join(fields, "")
 }
 
-// If argument is flatcase style string, return true.
-// If first character is digit, always returns false
 func IsFlatCase(s string) bool {
 	if isFirstRuneDigit(s) {
 		return false
@@ -130,13 +111,10 @@ func IsFlatCase(s string) bool {
 	}
 }
 
-// Convert argument to UPPER_CASE style string.
-// If argument is empty, return itself.
 func ToUpperCase(s string) string {
 	return strings.ToUpper(ToSnakeCase(s))
 }
 
-// If argument is UPPER_CASE style string, return true.
 func IsUpperCase(s string) bool {
 	if strings.Contains(s, "_") {
 		fields := strings.Split(s, "_")

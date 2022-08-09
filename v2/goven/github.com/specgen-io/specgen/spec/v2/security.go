@@ -5,8 +5,8 @@ import (
 )
 
 type securityRef struct {
-	Name Name
-	Args []string
+	Name	Name
+	Args	[]string
 }
 
 type SecurityRef securityRef

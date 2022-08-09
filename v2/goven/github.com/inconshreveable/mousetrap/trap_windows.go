@@ -1,6 +1,3 @@
-// +build windows
-// +build !go1.4
-
 package mousetrap
 
 import (
@@ -11,29 +8,27 @@ import (
 )
 
 const (
-	// defined by the Win32 API
 	th32cs_snapprocess uintptr = 0x2
 )
 
 var (
-	kernel                   = syscall.MustLoadDLL("kernel32.dll")
-	CreateToolhelp32Snapshot = kernel.MustFindProc("CreateToolhelp32Snapshot")
-	Process32First           = kernel.MustFindProc("Process32FirstW")
-	Process32Next            = kernel.MustFindProc("Process32NextW")
+	kernel				= syscall.MustLoadDLL("kernel32.dll")
+	CreateToolhelp32Snapshot	= kernel.MustFindProc("CreateToolhelp32Snapshot")
+	Process32First			= kernel.MustFindProc("Process32FirstW")
+	Process32Next			= kernel.MustFindProc("Process32NextW")
 )
 
-// ProcessEntry32 structure defined by the Win32 API
 type processEntry32 struct {
-	dwSize              uint32
-	cntUsage            uint32
-	th32ProcessID       uint32
-	th32DefaultHeapID   int
-	th32ModuleID        uint32
-	cntThreads          uint32
-	th32ParentProcessID uint32
-	pcPriClassBase      int32
-	dwFlags             uint32
-	szExeFile           [syscall.MAX_PATH]uint16
+	dwSize			uint32
+	cntUsage		uint32
+	th32ProcessID		uint32
+	th32DefaultHeapID	int
+	th32ModuleID		uint32
+	cntThreads		uint32
+	th32ParentProcessID	uint32
+	pcPriClassBase		int32
+	dwFlags			uint32
+	szExeFile		[syscall.MAX_PATH]uint16
 }
 
 func getProcessEntry(pid int) (pe *processEntry32, err error) {
@@ -76,12 +71,6 @@ func getppid() (pid int, err error) {
 	return
 }
 
-// StartedByExplorer returns true if the program was invoked by the user double-clicking
-// on the executable from explorer.exe
-//
-// It is conservative and returns false if any of the internal calls fail.
-// It does not guarantee that the program was run from a terminal. It only can tell you
-// whether it was launched from explorer.exe
 func StartedByExplorer() bool {
 	ppid, err := getppid()
 	if err != nil {

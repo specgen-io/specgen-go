@@ -82,8 +82,8 @@ func generateClientImplementation(api *spec.Api, versionModule, modelsModule, em
 	}
 
 	return &generator.CodeFile{
-		Path:    versionModule.GetPath("client.go"),
-		Content: w.String(),
+		Path:		versionModule.GetPath("client.go"),
+		Content:	w.String(),
 	}
 }
 

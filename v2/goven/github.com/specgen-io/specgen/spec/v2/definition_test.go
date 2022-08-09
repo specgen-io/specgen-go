@@ -35,9 +35,9 @@ func StrPtr(str string) *string {
 
 func Test_DefinitionDefault_Marshal_Short(t *testing.T) {
 	definition := &DefinitionDefault{
-		Type: Type{Definition: *Plain("string")},
-		Default: StrPtr("the value"),
-		Description: StrPtr("something here"),
+		Type:		Type{Definition: *Plain("string")},
+		Default:	StrPtr("the value"),
+		Description:	StrPtr("something here"),
 	}
 	data, err := yaml.Marshal(definition)
 	expected := "string = the value # something here"

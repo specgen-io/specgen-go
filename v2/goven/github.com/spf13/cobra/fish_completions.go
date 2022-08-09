@@ -9,7 +9,7 @@ import (
 )
 
 func genFishComp(buf io.StringWriter, name string, includeDesc bool) {
-	// Variables should not contain a '-' or ':' character
+
 	nameForVar := name
 	nameForVar = strings.ReplaceAll(nameForVar, "-", "_")
 	nameForVar = strings.ReplaceAll(nameForVar, ":", "_")
@@ -46,7 +46,7 @@ function __%[1]s_perform_completion
 
     # Some programs may output extra empty lines after the directive.
     # Let's ignore them or else it will break completion.
-    # Ref: https://github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/cobra/issues/1279
+    # Ref: https://github.com/spf13/cobra/issues/1279
     for line in $results[-1..1]
         if test (string trim -- $line) = ""
             # Found an empty line, remove it
@@ -200,7 +200,6 @@ complete -c %[2]s -n '__%[1]s_prepare_completions' -f -a '$__%[1]s_comp_results'
 		ShellCompDirectiveFilterFileExt, ShellCompDirectiveFilterDirs, activeHelpEnvVar(name)))
 }
 
-// GenFishCompletion generates fish completion file and writes to the passed writer.
 func (c *Command) GenFishCompletion(w io.Writer, includeDesc bool) error {
 	buf := new(bytes.Buffer)
 	genFishComp(buf, c.Name(), includeDesc)
@@ -208,7 +207,6 @@ func (c *Command) GenFishCompletion(w io.Writer, includeDesc bool) error {
 	return err
 }
 
-// GenFishCompletionFile generates fish completion file.
 func (c *Command) GenFishCompletionFile(filename string, includeDesc bool) error {
 	outFile, err := os.Create(filename)
 	if err != nil {

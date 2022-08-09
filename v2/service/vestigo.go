@@ -76,8 +76,8 @@ func generateRouting(modelsModule module.Module, versionModule module.Module, ap
 	w.Line(`}`)
 
 	return &generator.CodeFile{
-		Path:    versionModule.GetPath(fmt.Sprintf("%s_routing.go", api.Name.SnakeCase())),
-		Content: w.String(),
+		Path:		versionModule.GetPath(fmt.Sprintf("%s_routing.go", api.Name.SnakeCase())),
+		Content:	w.String(),
 	}
 }
 
@@ -317,8 +317,8 @@ func generateSpecRouting(specification *spec.Spec, module module.Module) *genera
 	w.Line(`}`)
 
 	return &generator.CodeFile{
-		Path:    module.GetPath("spec_routing.go"),
-		Content: w.String(),
+		Path:		module.GetPath("spec_routing.go"),
+		Content:	w.String(),
 	}
 }
 

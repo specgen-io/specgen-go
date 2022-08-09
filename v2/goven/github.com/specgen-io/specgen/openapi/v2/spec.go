@@ -3,8 +3,8 @@ package openapi
 import "github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
 
 type UrlOperations struct {
-	Url        string
-	Operations []*spec.NamedOperation
+	Url		string
+	Operations	[]*spec.NamedOperation
 }
 
 func OperationsByUrl(specification *spec.Spec) []*UrlOperations {

@@ -1,8 +1,8 @@
 package generator
 
 type Sources struct {
-	Generated  []CodeFile
-	Scaffolded []CodeFile
+	Generated	[]CodeFile
+	Scaffolded	[]CodeFile
 }
 
 func NewSources() *Sources {

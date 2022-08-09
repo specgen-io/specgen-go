@@ -8,15 +8,15 @@ import (
 )
 
 type Config struct {
-	IndentationStr            string
-	LeadSpacesIndentationSize int
-	Substitutions             map[string]string
+	IndentationStr			string
+	LeadSpacesIndentationSize	int
+	Substitutions			map[string]string
 }
 
 type Writer struct {
-	config      Config
-	buffer      *bytes.Buffer
-	indentation int
+	config		Config
+	buffer		*bytes.Buffer
+	indentation	int
 }
 
 func NewWriter(config Config) *Writer {

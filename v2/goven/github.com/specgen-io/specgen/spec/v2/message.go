@@ -8,14 +8,14 @@ import (
 type Level string
 
 const (
-	LevelError   Level = "error"
-	LevelWarning Level = "warning"
-	LevelInfo    Level = "information"
+	LevelError	Level	= "error"
+	LevelWarning	Level	= "warning"
+	LevelInfo	Level	= "information"
 )
 
 type Location struct {
-	Line   int
-	Column int
+	Line	int
+	Column	int
 }
 
 func locationFromNode(node *yaml.Node) *Location {
@@ -26,9 +26,9 @@ func locationFromNode(node *yaml.Node) *Location {
 }
 
 type Message struct {
-	Level    Level
-	Message  string
-	Location *Location
+	Level		Level
+	Message		string
+	Location	*Location
 }
 
 func Error(messageFormat string, args ...interface{}) Message {
