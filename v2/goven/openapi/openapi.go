@@ -3,10 +3,10 @@ package openapi
 import (
 	"strings"
 
+	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/github.com/pinzolo/casee"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/yamlx/v2"
+	"github.com/specgen-io/specgen-golang/v2/goven/spec"
+	"github.com/specgen-io/specgen-golang/v2/goven/yamlx"
 )
 
 func GenerateOpenapi(spec *spec.Spec, outFile string) *generator.CodeFile {

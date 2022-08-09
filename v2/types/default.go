@@ -3,7 +3,7 @@ package types
 import (
 	"fmt"
 	"github.com/specgen-io/specgen-golang/v2/goven/github.com/pinzolo/casee"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
+	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 )
 
 func DefaultValue(typ *spec.TypeDef, value string) string {

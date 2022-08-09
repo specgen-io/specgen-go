@@ -5,8 +5,8 @@ import (
 	"strings"
 
 	"github.com/specgen-io/specgen-golang/v2/client"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
+	"github.com/specgen-io/specgen-golang/v2/goven/generator"
+	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/imports"
 	"github.com/specgen-io/specgen-golang/v2/models"
 	"github.com/specgen-io/specgen-golang/v2/module"

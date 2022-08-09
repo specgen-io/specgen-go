@@ -2,8 +2,8 @@ package spec
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/yamlx/v2"
 	"github.com/specgen-io/specgen-golang/v2/goven/gopkg.in/specgen-io/yaml.v3"
+	"github.com/specgen-io/specgen-golang/v2/goven/yamlx"
 )
 
 type Responses []Response

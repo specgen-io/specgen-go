@@ -1,10 +1,10 @@
 package generator
 
 import (
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2/console"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
+	"github.com/specgen-io/specgen-golang/v2/goven/generator/console"
 	"github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/cobra"
 	"github.com/specgen-io/specgen-golang/v2/goven/golang.org/x/exp/slices"
+	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"io/ioutil"
 	"os"
 	"sort"

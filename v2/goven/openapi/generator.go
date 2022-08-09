@@ -1,8 +1,8 @@
 package openapi
 
 import (
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/generator/v2"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/specgen-io/specgen/spec/v2"
+	"github.com/specgen-io/specgen-golang/v2/goven/generator"
+	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 )
 
 var Openapi = generator.Generator{
