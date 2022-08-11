@@ -8,16 +8,17 @@ import (
 
 type Spec struct {
 	Meta
-	Versions []Version
+	Versions   []Version
+	HttpErrors HttpErrors
 }
 
 type VersionSpecification struct {
-	Http   Apis   `yaml:"http"`
+	Http   Http   `yaml:"http"`
 	Models Models `yaml:"models"`
 }
 
 type Version struct {
-	Version Name
+	Name Name
 	VersionSpecification
 	ResolvedModels []*NamedModel
 }
@@ -70,7 +71,12 @@ func (value *Spec) UnmarshalYAML(node *yaml.Node) error {
 	meta := Meta{}
 	node.DecodeWith(decodeStrict, &meta)
 
-	*value = Spec{meta, versions}
+	httpErrors, err := createHttpErrors()
+	if err != nil {
+		return err
+	}
+
+	*value = Spec{meta, versions, *httpErrors}
 	return nil
 }
 
@@ -91,8 +97,8 @@ func (value Spec) MarshalYAML() (interface{}, error) {
 	for index := 0; index < len(value.Versions); index++ {
 		version := value.Versions[index]
 
-		if version.Version.Source != "" {
-			yamlMap.Add(version.Version.Source, version.VersionSpecification)
+		if version.Name.Source != "" {
+			yamlMap.Add(version.Name.Source, version.VersionSpecification)
 		} else {
 			yamlMap.Merge(version.VersionSpecification)
 		}
