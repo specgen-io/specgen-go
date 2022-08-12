@@ -1,8 +1,8 @@
 package spec
 
 import (
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/pinzolo/casee"
-	"github.com/specgen-io/specgen-golang/v2/goven/gopkg.in/specgen-io/yaml.v3"
+	"github.com/pinzolo/casee"
+	"gopkg.in/specgen-io/yaml.v3"
 )
 
 type Name struct {

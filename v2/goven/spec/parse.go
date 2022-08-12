@@ -2,7 +2,7 @@ package spec
 
 import (
 	"bytes"
-	"github.com/specgen-io/specgen-golang/v2/goven/gopkg.in/specgen-io/yaml.v3"
+	"gopkg.in/specgen-io/yaml.v3"
 )
 
 type SpecParseResult struct {

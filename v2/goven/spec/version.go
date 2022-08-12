@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 )
-import "github.com/specgen-io/specgen-golang/v2/goven/gopkg.in/specgen-io/yaml.v3"
+import "gopkg.in/specgen-io/yaml.v3"
 
 var SpecVersion = "2.1"
 

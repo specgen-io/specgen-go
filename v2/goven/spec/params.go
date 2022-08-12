@@ -2,8 +2,8 @@ package spec
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen-golang/v2/goven/gopkg.in/specgen-io/yaml.v3"
 	"github.com/specgen-io/specgen-golang/v2/goven/yamlx"
+	"gopkg.in/specgen-io/yaml.v3"
 )
 
 type UrlParams Params

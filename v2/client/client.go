@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/pinzolo/casee"
 	"github.com/specgen-io/specgen-golang/v2/common"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/pinzolo/casee"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/imports"
 	"github.com/specgen-io/specgen-golang/v2/models"
