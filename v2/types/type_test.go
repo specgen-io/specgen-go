@@ -1,8 +1,8 @@
 package types
 
 import (
+	"github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
-	"gotest.tools/assert"
 	"testing"
 )
 

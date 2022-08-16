@@ -2,7 +2,7 @@ package yamlx
 
 import (
 	"bytes"
-	"gopkg.in/specgen-io/yaml.v3"
+	"github.com/specgen-io/specgen-golang/v2/goven/gopkg.in/specgen-io/yaml.v3"
 )
 
 func ToYamlString(data interface{}) (string, error) {

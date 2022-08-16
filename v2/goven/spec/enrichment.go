@@ -3,7 +3,7 @@ package spec
 import (
 	"errors"
 	"fmt"
-	"gopkg.in/specgen-io/yaml.v3"
+	"github.com/specgen-io/specgen-golang/v2/goven/gopkg.in/specgen-io/yaml.v3"
 )
 
 func enrich(options SpecOptions, specification *Spec) (*Messages, error) {

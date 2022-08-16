@@ -2,7 +2,7 @@ package types
 
 import (
 	"fmt"
-	"github.com/pinzolo/casee"
+	"github.com/specgen-io/specgen-golang/v2/goven/github.com/pinzolo/casee"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 )
 
