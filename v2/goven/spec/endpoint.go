@@ -3,7 +3,7 @@ package spec
 import (
 	"errors"
 	"fmt"
-	"github.com/specgen-io/specgen-golang/v2/goven/gopkg.in/specgen-io/yaml.v3"
+	"gopkg.in/specgen-io/yaml.v3"
 	"regexp"
 	"strings"
 )

@@ -1,7 +1,7 @@
 package generator
 
 import (
-	"github.com/specgen-io/specgen-golang/v2/goven/gotest.tools/assert"
+	"gotest.tools/assert"
 	"strings"
 	"testing"
 )

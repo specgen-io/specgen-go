@@ -5,7 +5,7 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/generators"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator/console"
-	"github.com/specgen-io/specgen-golang/v2/goven/github.com/spf13/cobra"
+	"github.com/spf13/cobra"
 	"os"
 )
 
