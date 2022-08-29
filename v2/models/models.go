@@ -20,27 +20,27 @@ func GenerateModels(specification *spec.Spec, moduleName string, generatePath st
 	for _, version := range specification.Versions {
 		versionModule := rootModule.Submodule(version.Name.FlatCase())
 		modelsModule := versionModule.Submodule(types.ModelsPackage)
-		sources.AddGeneratedAll(GenerateVersionModels(version.ResolvedModels, modelsModule))
+		sources.AddGeneratedAll(GenerateVersionModels(&version, modelsModule))
 	}
 	return sources
 }
 
-func GenerateVersionModels(models []*spec.NamedModel, module module.Module) []generator.CodeFile {
+func GenerateVersionModels(version *spec.Version, module module.Module) []generator.CodeFile {
 	return []generator.CodeFile{
-		*generateVersionModelsCode(models, module),
+		*generateVersionModelsCode(version, module),
 		*generateEnumsHelperFunctions(module),
 	}
 }
 
-func generateVersionModelsCode(models []*spec.NamedModel, module module.Module) *generator.CodeFile {
+func generateVersionModelsCode(version *spec.Version, module module.Module) *generator.CodeFile {
 	w := writer.NewGoWriter()
 	w.Line("package %s", module.Name)
 
 	imports := imports.New()
-	imports.AddModelsTypes(models)
+	imports.AddModelsTypes(version)
 	imports.Write(w)
 
-	for _, model := range models {
+	for _, model := range version.ResolvedModels {
 		w.EmptyLine()
 		if model.IsObject() {
 			generateObjectModel(w, model)

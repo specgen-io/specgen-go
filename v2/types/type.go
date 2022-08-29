@@ -9,15 +9,8 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/module"
 )
 
-var ModelsPackage = "models"
-var ErrorsModelsPackage = "errmodels"
-
 func GoType(typ *spec.TypeDef) string {
 	return goType(typ, ModelsPackage)
-}
-
-func GoErrType(typ *spec.TypeDef) string {
-	return goType(typ, ErrorsModelsPackage)
 }
 
 func GoTypeSamePackage(typ *spec.TypeDef) string {
@@ -82,6 +75,8 @@ func PlainGoType(typ string, modelsPackage string) string {
 }
 
 const EmptyType = `empty.Type`
+
+var ModelsPackage = "models"
 
 func GenerateEmpty(module module.Module) *generator.CodeFile {
 	code := `
