@@ -2,12 +2,15 @@ package responses
 
 import (
 	"fmt"
-
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
+
+func NewErrorResponse(response spec.Response, body string) string {
+	return fmt.Sprintf(`&httperrors.%s{Body: %s}`, response.Name.PascalCase(), body)
+}
 
 func NewResponse(response *spec.OperationResponse, body string) string {
 	return fmt.Sprintf(`%s{%s: &%s}`, ResponseTypeName(response.Operation), response.Name.PascalCase(), body)

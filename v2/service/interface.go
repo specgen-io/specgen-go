@@ -1,7 +1,6 @@
 package service
 
 import (
-	"github.com/specgen-io/specgen-golang/v2/common"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/imports"
@@ -47,7 +46,7 @@ func generateServiceInterface(api *spec.Api, apiModule, modelsModule, errorsMode
 	w.EmptyLine()
 	w.Line(`type %s interface {`, serviceInterfaceName)
 	for _, operation := range api.Operations {
-		w.Line(`  %s`, common.OperationSignature(&operation, nil))
+		w.Line(`  %s`, OperationSignature(&operation, nil))
 	}
 	w.Line(`}`)
 	return &generator.CodeFile{
