@@ -1,12 +1,13 @@
 package models
 
 import (
+	"strings"
+
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/module"
-	"strings"
 )
 
-func GenerateEnumsHelperFunctions(module module.Module) *generator.CodeFile {
+func generateEnumsHelperFunctions(module module.Module) *generator.CodeFile {
 	code := `
 package [[.PackageName]]
 
@@ -17,7 +18,7 @@ import (
 )
 
 func contains(lookFor string, arr []string) bool {
-	for _, value := range arr {
+	for _, value := range arr{
 		if lookFor == value {
 			return true
 		}
@@ -25,7 +26,7 @@ func contains(lookFor string, arr []string) bool {
 	return false
 }
 
-func ReadStringValue(b []byte, values []string) (string, error) {
+func readEnumStringValue(b []byte, values []string) (string, error) {
 	var str string
 	if err := json.Unmarshal(b, &str); err != nil {
 		return "", err
@@ -37,5 +38,5 @@ func ReadStringValue(b []byte, values []string) (string, error) {
 }
 `
 	code, _ = generator.ExecuteTemplate(code, struct{ PackageName string }{module.Name})
-	return &generator.CodeFile{module.GetPath("helpers.go"), strings.TrimSpace(code)}
+	return &generator.CodeFile{module.GetPath("enums_helpers.go"), strings.TrimSpace(code)}
 }

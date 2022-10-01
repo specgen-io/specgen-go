@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 
+	"github.com/specgen-io/specgen-golang/v2/common"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/imports"
@@ -40,7 +41,7 @@ func generateServiceImplementation(api *spec.Api, apiModule, modelsModule, targe
 	w.EmptyLine()
 	apiPackage := api.Name.SnakeCase()
 	for _, operation := range api.Operations {
-		w.Line(`func (service *%s) %s {`, serviceTypeName(api), OperationSignature(&operation, &apiPackage))
+		w.Line(`func (service *%s) %s {`, serviceTypeName(api), common.OperationSignature(&operation, &apiPackage))
 		singleEmptyResponse := len(operation.Responses) == 1 && operation.Responses[0].Type.Definition.IsEmpty()
 		if singleEmptyResponse {
 			w.Line(`  return errors.New("implementation has not added yet")`)
@@ -59,32 +60,36 @@ func generateServiceImplementation(api *spec.Api, apiModule, modelsModule, targe
 func isContainsModel(api *spec.Api) bool {
 	for _, operation := range api.Operations {
 		if operation.Body != nil {
-			if types.IsModel(&operation.Body.Type.Definition) {
+			if isModel(&operation.Body.Type.Definition) {
 				return true
 			}
 		}
 		for _, param := range operation.QueryParams {
-			if types.IsModel(&param.Type.Definition) {
+			if isModel(&param.Type.Definition) {
 				return true
 			}
 		}
 		for _, param := range operation.HeaderParams {
-			if types.IsModel(&param.Type.Definition) {
+			if isModel(&param.Type.Definition) {
 				return true
 			}
 		}
 		for _, param := range operation.Endpoint.UrlParams {
-			if types.IsModel(&param.Type.Definition) {
+			if isModel(&param.Type.Definition) {
 				return true
 			}
 		}
 		for _, response := range operation.Responses {
-			if types.IsModel(&response.Type.Definition) {
+			if isModel(&response.Type.Definition) {
 				return true
 			}
 		}
 	}
 	return false
+}
+
+func isModel(def *spec.TypeDef) bool {
+	return def.Info.Model != nil
 }
 
 func serviceTypeName(api *spec.Api) string {
