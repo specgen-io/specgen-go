@@ -1,7 +1,6 @@
 package client
 
 import (
-	"fmt"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/imports"
@@ -11,8 +10,7 @@ import (
 )
 
 func httpErrors(module, errorsModelsModule module.Module, errors *spec.Responses) *generator.CodeFile {
-	w := writer.NewGoWriter()
-	w.Line("package %s", module.Name)
+	w := writer.New(module, "errors.go")
 
 	imports := imports.New()
 	imports.Add("fmt")
@@ -26,10 +24,7 @@ func httpErrors(module, errorsModelsModule module.Module, errors *spec.Responses
 	internalServerError := errors.GetByStatusName(spec.HttpStatusInternalServerError)
 	getError(w, internalServerError)
 
-	return &generator.CodeFile{
-		Path:    module.GetPath(fmt.Sprintf("errors.go")),
-		Content: w.String(),
-	}
+	return w.ToCodeFile()
 }
 
 func getError(w generator.Writer, response *spec.Response) {
