@@ -12,19 +12,29 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
-func NewEncodingJsonGenerator() *EncodingJsonGenerator {
-	return &EncodingJsonGenerator{}
+func NewEncodingJsonGenerator(modules *Modules) *EncodingJsonGenerator {
+	return &EncodingJsonGenerator{modules}
 }
 
-type EncodingJsonGenerator struct{}
+type EncodingJsonGenerator struct {
+	Modules *Modules
+}
 
-func (g *EncodingJsonGenerator) GenerateVersionModels(models []*spec.NamedModel, module, enumsModule module.Module) *generator.CodeFile {
-	w := writer.New(module, "models.go")
+func (g *EncodingJsonGenerator) GenerateVersionModels(version *spec.Version) *generator.CodeFile {
+	return g.models(version.ResolvedModels, g.Modules.Models(version))
+}
+
+func (g *EncodingJsonGenerator) GenerateErrorModels(httperrors *spec.HttpErrors) *generator.CodeFile {
+	return g.models(httperrors.ResolvedModels, g.Modules.HttpErrorsModels)
+}
+
+func (g *EncodingJsonGenerator) models(models []*spec.NamedModel, modelsModule module.Module) *generator.CodeFile {
+	w := writer.New(modelsModule, "models.go")
 
 	imports := imports.New()
 	imports.AddModelsTypes(models)
 	if types.ModelsHasEnum(models) {
-		imports.Add(enumsModule.Package)
+		imports.Add(g.Modules.Enums.Package)
 	}
 	imports.Write(w)
 
