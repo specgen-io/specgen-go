@@ -12,7 +12,8 @@ import (
 )
 
 func generateErrors(module, errorsModelsModule, respondModule module.Module, responses *spec.Responses) *generator.CodeFile {
-	w := writer.New(module, "responses.go")
+	w := writer.NewGoWriter()
+	w.Line("package %s", module.Name)
 
 	imports := imports.New()
 	imports.AddAlias("github.com/sirupsen/logrus", "log")
@@ -42,7 +43,10 @@ func generateErrors(module, errorsModelsModule, respondModule module.Module, res
 	generateResponseWriting(w.Indented(), `logFields`, internalServerError, `error`)
 	w.Line(`}`)
 
-	return w.ToCodeFile()
+	return &generator.CodeFile{
+		Path:    module.GetPath(fmt.Sprintf("responses.go")),
+		Content: w.String(),
+	}
 }
 
 func callCheckContentType(logFieldsVar, expectedContentType, requestVar, responseVar string) string {

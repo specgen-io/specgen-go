@@ -2,10 +2,11 @@ package models
 
 import (
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
+	"github.com/specgen-io/specgen-golang/v2/module"
 	"strings"
 )
 
-func (g *EncodingJsonGenerator) GenerateEnumsHelperFunctions() *generator.CodeFile {
+func GenerateEnumsHelperFunctions(module module.Module) *generator.CodeFile {
 	code := `
 package [[.PackageName]]
 
@@ -35,6 +36,6 @@ func ReadStringValue(b []byte, values []string) (string, error) {
 	return str, nil
 }
 `
-	code, _ = generator.ExecuteTemplate(code, struct{ PackageName string }{g.Modules.Enums.Name})
-	return &generator.CodeFile{g.Modules.Enums.GetPath("helpers.go"), strings.TrimSpace(code)}
+	code, _ = generator.ExecuteTemplate(code, struct{ PackageName string }{module.Name})
+	return &generator.CodeFile{module.GetPath("helpers.go"), strings.TrimSpace(code)}
 }

@@ -12,13 +12,11 @@ import (
 func GenerateService(specification *spec.Spec, moduleName string, swaggerPath string, generatePath string, servicesPath string) *generator.Sources {
 	sources := generator.NewSources()
 
-	modules := models.NewModules(moduleName, generatePath, specification)
-	modelsGenerator := models.NewGenerator(modules)
-
 	rootModule := module.New(moduleName, generatePath)
 	sources.AddGenerated(generateSpecRouting(specification, rootModule))
 
-	sources.AddGenerated(modelsGenerator.GenerateEnumsHelperFunctions())
+	enumsModule := rootModule.Submodule("enums")
+	sources.AddGenerated(models.GenerateEnumsHelperFunctions(enumsModule))
 
 	emptyModule := rootModule.Submodule("empty")
 	sources.AddGenerated(types.GenerateEmpty(emptyModule))
@@ -31,7 +29,7 @@ func GenerateService(specification *spec.Spec, moduleName string, swaggerPath st
 
 	errorsModule := rootModule.Submodule("httperrors")
 	errorsModelsModule := errorsModule.Submodule("models")
-	sources.AddGenerated(modelsGenerator.GenerateErrorModels(specification.HttpErrors))
+	sources.AddGenerated(models.GenerateVersionModels(specification.HttpErrors.ResolvedModels, errorsModelsModule, enumsModule))
 	sources.AddGeneratedAll(httpErrors(errorsModule, errorsModelsModule, paramsParserModule, respondModule, &specification.HttpErrors.Responses))
 
 	contentTypeModule := rootModule.Submodule("contenttype")
@@ -42,9 +40,9 @@ func GenerateService(specification *spec.Spec, moduleName string, swaggerPath st
 		modelsModule := versionModule.Submodule(types.VersionModelsPackage)
 		routingModule := versionModule.Submodule("routing")
 
-		sources.AddGeneratedAll(generateRoutings(&version, versionModule, routingModule, contentTypeModule, errorsModule, errorsModelsModule, modelsModule, paramsParserModule, respondModule, modelsGenerator))
+		sources.AddGeneratedAll(generateRoutings(&version, versionModule, routingModule, contentTypeModule, errorsModule, errorsModelsModule, modelsModule, paramsParserModule, respondModule))
 		sources.AddGeneratedAll(generateServiceInterfaces(&version, versionModule, modelsModule, errorsModelsModule, emptyModule))
-		sources.AddGenerated(modelsGenerator.GenerateVersionModels(&version))
+		sources.AddGenerated(models.GenerateVersionModels(version.ResolvedModels, modelsModule, enumsModule))
 	}
 
 	if swaggerPath != "" {

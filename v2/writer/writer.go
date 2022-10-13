@@ -1,21 +1,15 @@
 package writer
 
 import (
-	"github.com/specgen-io/specgen-golang/v2/goven/generator"
-	"github.com/specgen-io/specgen-golang/v2/module"
 	"strings"
+
+	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 )
 
-func GoConfig() generator.Config {
-	return generator.Config{"\t", 2, map[string]string{"PERCENT_": "%"}}
-}
+var GoConfig = generator.Config{"\t", 2, map[string]string{"PERCENT_": "%"}}
 
-func New(module module.Module, filename string) generator.Writer {
-	config := GoConfig()
-	w := generator.NewWriter2(module.GetPath(filename), config)
-	w.Line("package %s", module.Name)
-	w.EmptyLine()
-	return w
+func NewGoWriter() generator.Writer {
+	return generator.NewWriter(GoConfig)
 }
 
 func colWidth(lines [][]string, colIndex int) int {

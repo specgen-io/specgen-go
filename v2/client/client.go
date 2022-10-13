@@ -21,12 +21,10 @@ var ToUpperCase = casee.ToUpperCase
 func GenerateClient(specification *spec.Spec, moduleName string, generatePath string) *generator.Sources {
 	sources := generator.NewSources()
 
-	modules := models.NewModules(moduleName, generatePath, specification)
-	modelsGenerator := models.NewGenerator(modules)
-
 	rootModule := module.New(moduleName, generatePath)
 
-	sources.AddGenerated(modelsGenerator.GenerateEnumsHelperFunctions())
+	enumsModule := rootModule.Submodule("enums")
+	sources.AddGenerated(models.GenerateEnumsHelperFunctions(enumsModule))
 
 	emptyModule := rootModule.Submodule("empty")
 	sources.AddGenerated(types.GenerateEmpty(emptyModule))
@@ -39,13 +37,13 @@ func GenerateClient(specification *spec.Spec, moduleName string, generatePath st
 
 	errorsModule := rootModule.Submodule("httperrors")
 	errorsModelsModule := errorsModule.Submodule("models")
-	sources.AddGenerated(modelsGenerator.GenerateErrorModels(specification.HttpErrors))
+	sources.AddGenerated(models.GenerateVersionModels(specification.HttpErrors.ResolvedModels, errorsModelsModule, enumsModule))
 	sources.AddGenerated(httpErrors(errorsModule, errorsModelsModule, &specification.HttpErrors.Responses))
 
 	for _, version := range specification.Versions {
 		versionModule := rootModule.Submodule(version.Name.FlatCase())
 		modelsModule := versionModule.Submodule(types.VersionModelsPackage)
-		sources.AddGenerated(modelsGenerator.GenerateVersionModels(&version))
+		sources.AddGenerated(models.GenerateVersionModels(version.ResolvedModels, modelsModule, enumsModule))
 		sources.AddGeneratedAll(generateClientsImplementations(&version, versionModule, convertModule, emptyModule, errorsModule, errorsModelsModule, modelsModule, responseModule))
 	}
 	return sources
@@ -61,7 +59,8 @@ func generateClientsImplementations(version *spec.Version, versionModule, conver
 }
 
 func generateClientImplementation(api *spec.Api, versionModule, convertModule, emptyModule, errorsModule, errorsModelsModule, modelsModule, responseModule module.Module) *generator.CodeFile {
-	w := writer.New(versionModule, "client.go")
+	w := writer.NewGoWriter()
+	w.Line("package %s", versionModule.Name)
 
 	imports := imports.New().
 		Add("fmt").
@@ -98,7 +97,10 @@ func generateClientImplementation(api *spec.Api, versionModule, convertModule, e
 		generateClientFunction(w, &operation)
 	}
 
-	return w.ToCodeFile()
+	return &generator.CodeFile{
+		Path:    versionModule.GetPath("client.go"),
+		Content: w.String(),
+	}
 }
 
 func generateClientWithCtor(w generator.Writer) {
