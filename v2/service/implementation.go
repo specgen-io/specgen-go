@@ -21,17 +21,16 @@ func generateServiceImplementations(version *spec.Version, versionModule, models
 }
 
 func generateServiceImplementation(api *spec.Api, apiModule, modelsModule, targetModule module.Module) *generator.CodeFile {
-	w := writer.NewGoWriter()
-	w.Line("package %s", targetModule.Name)
+	w := writer.New(targetModule, fmt.Sprintf("%s.go", api.Name.SnakeCase()))
 
 	imports := imports.New()
 	imports.Add("errors")
 	imports.AddApiTypes(api)
 	if types.ApiHasBody(api) {
-		imports.Add(apiModule.Package)
+		imports.Module(apiModule)
 	}
 	if isContainsModel(api) {
-		imports.Add(modelsModule.Package)
+		imports.Module(modelsModule)
 	}
 	imports.Write(w)
 
@@ -50,10 +49,7 @@ func generateServiceImplementation(api *spec.Api, apiModule, modelsModule, targe
 		w.Line(`}`)
 	}
 
-	return &generator.CodeFile{
-		Path:    targetModule.GetPath(fmt.Sprintf("%s.go", api.Name.SnakeCase())),
-		Content: w.String(),
-	}
+	return w.ToCodeFile()
 }
 
 func isContainsModel(api *spec.Api) bool {
