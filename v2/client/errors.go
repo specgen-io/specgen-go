@@ -9,8 +9,8 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
-func httpErrors(module, errorsModelsModule module.Module, errors *spec.Responses) *generator.CodeFile {
-	w := writer.New(module, "errors.go")
+func httpErrors(errorsModule, errorsModelsModule module.Module, errors *spec.Responses) *generator.CodeFile {
+	w := writer.New(errorsModule, "errors.go")
 
 	imports := imports.New()
 	imports.Add("fmt")

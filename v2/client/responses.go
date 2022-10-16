@@ -3,13 +3,12 @@ package client
 import (
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/module"
-	"strings"
+	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
-func generateResponseFunctions(module module.Module) *generator.CodeFile {
-	code := `
-package [[.PackageName]]
-
+func generateResponseFunctions(responseModule module.Module) *generator.CodeFile {
+	w := writer.New(responseModule, `response.go`)
+	w.Lines(`
 import (
 	"encoding/json"
 	log "github.com/sirupsen/logrus"
@@ -52,8 +51,6 @@ func Text(logFields log.Fields, resp *http.Response) ([]byte, error) {
 func Empty(logFields log.Fields, resp *http.Response) {
 	log.WithFields(logFields).WithField("status", resp.StatusCode).Info("Received response")
 }
-`
-
-	code, _ = generator.ExecuteTemplate(code, struct{ PackageName string }{module.Name})
-	return &generator.CodeFile{module.GetPath("response.go"), strings.TrimSpace(code)}
+`)
+	return w.ToCodeFile()
 }

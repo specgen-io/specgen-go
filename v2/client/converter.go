@@ -2,11 +2,10 @@ package client
 
 import (
 	"fmt"
-	"strings"
-
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/module"
+	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
 func callRawConvert(typ *spec.TypeDef, paramNameVar string) string {
@@ -60,10 +59,9 @@ func converterMethodNamePlain(typ *spec.TypeDef) string {
 	}
 }
 
-func generateConverter(module module.Module) *generator.CodeFile {
-	code := `
-package [[.PackageName]]
-
+func generateConverter(convertModule module.Module) *generator.CodeFile {
+	w := writer.New(convertModule, `convert.go`)
+	w.Lines(`
 import (
 	"cloud.google.com/go/civil"
 	"fmt"
@@ -274,8 +272,6 @@ func (self *ParamsConverter) StringEnumArray(key string, values []interface{}) {
 		self.parser.Add(key, fmt.Sprintf("%v", value))
 	}
 }
-`
-
-	code, _ = generator.ExecuteTemplate(code, struct{ PackageName string }{module.Name})
-	return &generator.CodeFile{module.GetPath("convert.go"), strings.TrimSpace(code)}
+`)
+	return w.ToCodeFile()
 }
