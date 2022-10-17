@@ -5,11 +5,10 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/imports"
 	"github.com/specgen-io/specgen-golang/v2/module"
-	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
-func httpErrors(errorsModule, errorsModelsModule module.Module, errors *spec.Responses) *generator.CodeFile {
+func (g *Generator) HttpErrors(errorsModule, errorsModelsModule module.Module, errors *spec.Responses) *generator.CodeFile {
 	w := writer.New(errorsModule, "errors.go")
 
 	imports := imports.New()
@@ -18,19 +17,19 @@ func httpErrors(errorsModule, errorsModelsModule module.Module, errors *spec.Res
 	imports.Write(w)
 
 	badRequestError := errors.GetByStatusName(spec.HttpStatusBadRequest)
-	getError(w, badRequestError)
+	g.getError(w, badRequestError)
 	notFoundError := errors.GetByStatusName(spec.HttpStatusNotFound)
-	getError(w, notFoundError)
+	g.getError(w, notFoundError)
 	internalServerError := errors.GetByStatusName(spec.HttpStatusInternalServerError)
-	getError(w, internalServerError)
+	g.getError(w, internalServerError)
 
 	return w.ToCodeFile()
 }
 
-func getError(w generator.Writer, response *spec.Response) {
+func (g *Generator) getError(w generator.Writer, response *spec.Response) {
 	w.EmptyLine()
 	w.Line(`type %s struct {`, response.Name.PascalCase())
-	w.Line(`	Body %s`, types.GoType(&response.Type.Definition))
+	w.Line(`	Body %s`, g.Types.GoType(&response.Type.Definition))
 	w.Line(`}`)
 	w.EmptyLine()
 	w.Line(`func (obj *%s) Error() string {`, response.Name.PascalCase())

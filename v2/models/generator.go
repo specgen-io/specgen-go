@@ -3,6 +3,7 @@ package models
 import (
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
+	"github.com/specgen-io/specgen-golang/v2/types"
 )
 
 type Generator interface {
@@ -13,5 +14,6 @@ type Generator interface {
 }
 
 func NewGenerator(modules *Modules) Generator {
-	return NewEncodingJsonGenerator(modules)
+	types := types.NewTypes()
+	return NewEncodingJsonGenerator(types, modules)
 }

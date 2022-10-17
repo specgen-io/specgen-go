@@ -5,6 +5,15 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 )
 
+func IsEnumModel(typ *spec.TypeDef) bool {
+	if IsModel(typ) {
+		if typ.Info.Model.IsEnum() {
+			return true
+		}
+	}
+	return false
+}
+
 func IsModel(def *spec.TypeDef) bool {
 	return def.Info.Model != nil
 }
