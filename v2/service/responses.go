@@ -3,9 +3,28 @@ package service
 import (
 	"fmt"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
+	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/module"
+	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
+
+func generateResponseStruct(w generator.Writer, types *types.Types, operation *spec.NamedOperation) {
+	w.Line(`type %s struct {`, responseTypeName(operation))
+	responses := [][]string{}
+	for _, response := range operation.Responses {
+		responses = append(responses, []string{
+			response.Name.PascalCase(),
+			types.GoType(spec.Nullable(&response.Type.Definition)),
+		})
+	}
+	writer.WriteAlignedLines(w.Indented(), responses)
+	w.Line(`}`)
+}
+
+func responseTypeName(operation *spec.NamedOperation) string {
+	return fmt.Sprintf(`%sResponse`, operation.Name.PascalCase())
+}
 
 func respondJson(logFields, resVar, statusCode, dataVar string) string {
 	return fmt.Sprintf(`respond.Json(%s, %s, %s, %s)`, logFields, resVar, statusCode, dataVar)

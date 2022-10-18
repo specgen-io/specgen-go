@@ -5,7 +5,6 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/imports"
 	"github.com/specgen-io/specgen-golang/v2/module"
-	"github.com/specgen-io/specgen-golang/v2/responses"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
@@ -39,13 +38,13 @@ func (g *Generator) generateServiceInterface(api *spec.Api, apiModule, modelsMod
 	for _, operation := range api.Operations {
 		if len(operation.Responses) > 1 {
 			w.EmptyLine()
-			responses.GenerateOperationResponseStruct(w, g.Types, &operation)
+			generateResponseStruct(w, g.Types, &operation)
 		}
 	}
 	w.EmptyLine()
 	w.Line(`type %s interface {`, serviceInterfaceName)
 	for _, operation := range api.Operations {
-		w.Line(`  %s`, g.OperationSignature(&operation, nil))
+		w.Line(`  %s`, g.operationSignature(&operation, nil))
 	}
 	w.Line(`}`)
 

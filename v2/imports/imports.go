@@ -2,12 +2,11 @@ package imports
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen-golang/v2/module"
-	"sort"
-
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
+	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
+	"sort"
 )
 
 type imports struct {
@@ -49,7 +48,6 @@ func (self *imports) Write(w generator.Writer) {
 		}
 		sort.Strings(imports)
 
-		w.EmptyLine()
 		w.Line(`import (`)
 		for _, theImport := range imports {
 			alias := self.imports[theImport]

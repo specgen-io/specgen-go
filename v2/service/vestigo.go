@@ -3,8 +3,6 @@ package service
 import (
 	"fmt"
 	"github.com/pinzolo/casee"
-	"strings"
-
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/imports"
@@ -12,6 +10,7 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
+	"strings"
 )
 
 type VestigoGenerator struct {
