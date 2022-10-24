@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
-	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
@@ -26,8 +25,8 @@ func responseTypeName(operation *spec.NamedOperation) string {
 	return fmt.Sprintf(`%sResponse`, operation.Name.PascalCase())
 }
 
-func generateResponseFunctions(responseModule module.Module) *generator.CodeFile {
-	w := writer.New(responseModule, `response.go`)
+func (g *NetHttpGenerator) GenerateResponseFunctions() *generator.CodeFile {
+	w := writer.New(g.Modules.Response, `response.go`)
 	w.Lines(`
 import (
 	"encoding/json"
