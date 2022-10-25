@@ -5,18 +5,17 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/imports"
-	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
-func (g *VestigoGenerator) generateErrors(converterModule, errorsModelsModule, respondModule module.Module, errors *spec.Responses) *generator.CodeFile {
-	w := writer.New(converterModule, "responses.go")
+func (g *VestigoGenerator) generateErrors(errors *spec.Responses) *generator.CodeFile {
+	w := writer.New(g.Modules.HttpErrors, "responses.go")
 
 	imports := imports.New()
 	imports.AddAliased("github.com/sirupsen/logrus", "log")
 	imports.Add("net/http")
-	imports.Module(errorsModelsModule)
-	imports.Module(respondModule)
+	imports.Module(g.Modules.HttpErrorsModels)
+	imports.Module(g.Modules.Respond)
 	imports.Write(w)
 
 	for _, errorResponse := range *errors {
