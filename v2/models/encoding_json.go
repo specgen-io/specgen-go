@@ -21,11 +21,11 @@ type EncodingJsonGenerator struct {
 	Modules *Modules
 }
 
-func (g *EncodingJsonGenerator) Models(version *spec.Version) *generator.CodeFile {
+func (g *EncodingJsonGenerator) GenerateVersionModels(version *spec.Version) *generator.CodeFile {
 	return g.models(version.ResolvedModels, g.Modules.Models(version))
 }
 
-func (g *EncodingJsonGenerator) ErrorModels(httperrors *spec.HttpErrors) *generator.CodeFile {
+func (g *EncodingJsonGenerator) GenerateErrorModels(httperrors *spec.HttpErrors) *generator.CodeFile {
 	return g.models(httperrors.ResolvedModels, g.Modules.HttpErrorsModels)
 }
 
@@ -42,11 +42,11 @@ func (g *EncodingJsonGenerator) models(models []*spec.NamedModel, modelsModule m
 	for _, model := range models {
 		w.EmptyLine()
 		if model.IsObject() {
-			g.objectModel(w, model)
+			g.generateObjectModel(w, model)
 		} else if model.IsOneOf() {
-			g.oneOfModel(w, model)
+			g.generateOneOfModel(w, model)
 		} else if model.IsEnum() {
-			g.enumModel(w, model)
+			g.generateEnumModel(w, model)
 		}
 	}
 
@@ -67,7 +67,7 @@ func (g *EncodingJsonGenerator) requiredFields(model *spec.NamedModel) string {
 	return fmt.Sprintf(`%sRequiredFields`, model.Name.CamelCase())
 }
 
-func (g *EncodingJsonGenerator) objectModel(w generator.Writer, model *spec.NamedModel) {
+func (g *EncodingJsonGenerator) generateObjectModel(w generator.Writer, model *spec.NamedModel) {
 	w.Line("type %s struct {", model.Name.PascalCase())
 	fields := [][]string{}
 	for _, field := range model.Object.Fields {
@@ -132,7 +132,7 @@ func (g *EncodingJsonGenerator) objectModel(w generator.Writer, model *spec.Name
 	w.Line(`}`)
 }
 
-func (g *EncodingJsonGenerator) enumModel(w generator.Writer, model *spec.NamedModel) {
+func (g *EncodingJsonGenerator) generateEnumModel(w generator.Writer, model *spec.NamedModel) {
 	w.Line("type %s %s", model.Name.PascalCase(), "string")
 	w.EmptyLine()
 	w.Line("const (")
@@ -170,11 +170,11 @@ func (g *EncodingJsonGenerator) enumValues(model *spec.NamedModel) string {
 	return fmt.Sprintf("%sValues", model.Name.PascalCase())
 }
 
-func (g *EncodingJsonGenerator) oneOfModel(w generator.Writer, model *spec.NamedModel) {
+func (g *EncodingJsonGenerator) generateOneOfModel(w generator.Writer, model *spec.NamedModel) {
 	if model.OneOf.Discriminator != nil {
-		g.oneOfModelDiscriminator(w, model)
+		g.generateOneOfModelDiscriminator(w, model)
 	} else {
-		g.oneOfModelWrapper(w, model)
+		g.generateOneOfModelWrapper(w, model)
 	}
 }
 
@@ -186,7 +186,7 @@ func (g *EncodingJsonGenerator) getCaseChecks(oneof *spec.OneOf) string {
 	return strings.Join(caseChecks, " && ")
 }
 
-func (g *EncodingJsonGenerator) oneOfModelWrapper(w generator.Writer, model *spec.NamedModel) {
+func (g *EncodingJsonGenerator) generateOneOfModelWrapper(w generator.Writer, model *spec.NamedModel) {
 	caseChecks := g.getCaseChecks(model.OneOf)
 	items := [][]string{}
 	w.Line("type %s struct {", model.Name.PascalCase())
@@ -223,7 +223,7 @@ func (g *EncodingJsonGenerator) oneOfModelWrapper(w generator.Writer, model *spe
 	w.Line(`}`)
 }
 
-func (g *EncodingJsonGenerator) oneOfModelDiscriminator(w generator.Writer, model *spec.NamedModel) {
+func (g *EncodingJsonGenerator) generateOneOfModelDiscriminator(w generator.Writer, model *spec.NamedModel) {
 	w.Line("type %s struct {", model.Name.PascalCase())
 	items := [][]string{}
 	for _, item := range model.OneOf.Items {

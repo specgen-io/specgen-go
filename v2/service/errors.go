@@ -5,24 +5,25 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/imports"
+	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
-func (g *VestigoGenerator) ErrorResponses(errors *spec.Responses) *generator.CodeFile {
-	w := writer.New(g.Modules.HttpErrors, "responses.go")
+func (g *VestigoGenerator) generateErrors(converterModule, errorsModelsModule, respondModule module.Module, errors *spec.Responses) *generator.CodeFile {
+	w := writer.New(converterModule, "responses.go")
 
 	imports := imports.New()
 	imports.AddAliased("github.com/sirupsen/logrus", "log")
 	imports.Add("net/http")
-	imports.Module(g.Modules.HttpErrorsModels)
-	imports.Module(g.Modules.Respond)
+	imports.Module(errorsModelsModule)
+	imports.Module(respondModule)
 	imports.Write(w)
 
 	for _, errorResponse := range *errors {
 		w.EmptyLine()
 		w.Line(`func Respond%s(logFields log.Fields, res http.ResponseWriter, error *%s) {`, errorResponse.Name.PascalCase(), g.Types.GoType(&errorResponse.Type.Definition))
 		w.Line(`  log.WithFields(logFields).Warn(error.Message)`)
-		g.WriteResponse(w.Indented(), `logFields`, &errorResponse, `error`)
+		g.generateResponseWriting(w.Indented(), `logFields`, &errorResponse, `error`)
 		w.Line(`}`)
 	}
 

@@ -4,11 +4,12 @@ import (
 	"fmt"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
+	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
-func Response(w generator.Writer, types *types.Types, operation *spec.NamedOperation) {
+func generateResponseStruct(w generator.Writer, types *types.Types, operation *spec.NamedOperation) {
 	w.Line(`type %s struct {`, responseTypeName(operation))
 	responses := [][]string{}
 	for _, response := range operation.Responses {
@@ -37,8 +38,8 @@ func respondEmpty(logFields, resVar, statusCode string) string {
 	return fmt.Sprintf(`respond.Empty(%s, %s, %s)`, logFields, resVar, statusCode)
 }
 
-func (g *VestigoGenerator) ResponseHelperFunctions() *generator.CodeFile {
-	w := writer.New(g.Modules.Respond, `respond.go`)
+func generateRespondFunctions(respondModule module.Module) *generator.CodeFile {
+	w := writer.New(respondModule, `respond.go`)
 	w.Lines(`
 import (
 	"encoding/json"

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
+	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
@@ -58,8 +59,8 @@ func converterMethodNamePlain(typ *spec.TypeDef) string {
 	}
 }
 
-func (g *Generator) Converter() *generator.CodeFile {
-	w := writer.New(g.Modules.Convert, `convert.go`)
+func generateConverter(convertModule module.Module) *generator.CodeFile {
+	w := writer.New(convertModule, `convert.go`)
 	w.Lines(`
 import (
 	"cloud.google.com/go/civil"
