@@ -4,12 +4,11 @@ import (
 	"fmt"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
-	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
-func generateResponseStruct(w generator.Writer, types *types.Types, operation *spec.NamedOperation) {
+func responseStruct(w generator.Writer, types *types.Types, operation *spec.NamedOperation) {
 	w.Line(`type %s struct {`, responseTypeName(operation))
 	responses := [][]string{}
 	for _, response := range operation.Responses {
@@ -26,8 +25,8 @@ func responseTypeName(operation *spec.NamedOperation) string {
 	return fmt.Sprintf(`%sResponse`, operation.Name.PascalCase())
 }
 
-func generateResponseFunctions(responseModule module.Module) *generator.CodeFile {
-	w := writer.New(responseModule, `response.go`)
+func (g *NetHttpGenerator) ResponseHelperFunctions() *generator.CodeFile {
+	w := writer.New(g.Modules.Response, `response.go`)
 	w.Lines(`
 import (
 	"encoding/json"
