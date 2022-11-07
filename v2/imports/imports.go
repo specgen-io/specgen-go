@@ -2,10 +2,10 @@ package imports
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
+	"github.com/specgen-io/specgen-golang/v2/writer"
 	"sort"
 )
 
@@ -40,7 +40,7 @@ func (self *imports) AddAliased(theImport string, alias string) *imports {
 	return self
 }
 
-func (self *imports) Write(w generator.Writer) {
+func (self *imports) Write(w *writer.Writer) {
 	if len(self.imports) > 0 {
 		imports := make([]string, 0, len(self.imports))
 		for theImport := range self.imports {
