@@ -4,17 +4,21 @@ import (
 	"fmt"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
+	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
-func responseStruct(w *writer.Writer, types *types.Types, operation *spec.NamedOperation) {
+func generateResponseStruct(w generator.Writer, types *types.Types, operation *spec.NamedOperation) {
 	w.Line(`type %s struct {`, responseTypeName(operation))
-	w.Indent()
+	responses := [][]string{}
 	for _, response := range operation.Responses {
-		w.LineAligned(`%s %s`, response.Name.PascalCase(), types.GoType(spec.Nullable(&response.Type.Definition)))
+		responses = append(responses, []string{
+			response.Name.PascalCase(),
+			types.GoType(spec.Nullable(&response.Type.Definition)),
+		})
 	}
-	w.Unindent()
+	writer.WriteAlignedLines(w.Indented(), responses)
 	w.Line(`}`)
 }
 
@@ -22,8 +26,8 @@ func responseTypeName(operation *spec.NamedOperation) string {
 	return fmt.Sprintf(`%sResponse`, operation.Name.PascalCase())
 }
 
-func (g *NetHttpGenerator) ResponseHelperFunctions() *generator.CodeFile {
-	w := writer.New(g.Modules.Response, `response.go`)
+func generateResponseFunctions(responseModule module.Module) *generator.CodeFile {
+	w := writer.New(responseModule, `response.go`)
 	w.Lines(`
 import (
 	"encoding/json"
