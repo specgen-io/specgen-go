@@ -4,21 +4,17 @@ import (
 	"fmt"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
-	"github.com/specgen-io/specgen-golang/v2/module"
 	"github.com/specgen-io/specgen-golang/v2/types"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
-func generateResponseStruct(w generator.Writer, types *types.Types, operation *spec.NamedOperation) {
+func Response(w *writer.Writer, types *types.Types, operation *spec.NamedOperation) {
 	w.Line(`type %s struct {`, responseTypeName(operation))
-	responses := [][]string{}
+	w.Indent()
 	for _, response := range operation.Responses {
-		responses = append(responses, []string{
-			response.Name.PascalCase(),
-			types.GoType(spec.Nullable(&response.Type.Definition)),
-		})
+		w.LineAligned(`%s %s`, response.Name.PascalCase(), types.GoType(spec.Nullable(&response.Type.Definition)))
 	}
-	writer.WriteAlignedLines(w.Indented(), responses)
+	w.Unindent()
 	w.Line(`}`)
 }
 
@@ -38,8 +34,8 @@ func respondEmpty(logFields, resVar, statusCode string) string {
 	return fmt.Sprintf(`respond.Empty(%s, %s, %s)`, logFields, resVar, statusCode)
 }
 
-func generateRespondFunctions(respondModule module.Module) *generator.CodeFile {
-	w := writer.New(respondModule, `respond.go`)
+func (g *VestigoGenerator) ResponseHelperFunctions() *generator.CodeFile {
+	w := writer.New(g.Modules.Respond, `respond.go`)
 	w.Lines(`
 import (
 	"encoding/json"
