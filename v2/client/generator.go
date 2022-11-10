@@ -1,6 +1,7 @@
 package client
 
 import (
+	"github.com/specgen-io/specgen-golang/v2/empty"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/models"
@@ -30,7 +31,7 @@ func NewGenerator(modules *Modules) *Generator {
 }
 
 func (g *Generator) EmptyType() *generator.CodeFile {
-	return types.GenerateEmpty(g.Modules.Empty)
+	return empty.GenerateEmpty(g.Modules.Empty)
 }
 
 func (g *Generator) AllStaticFiles() []generator.CodeFile {

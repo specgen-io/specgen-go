@@ -1,6 +1,7 @@
 package service
 
 import (
+	"github.com/specgen-io/specgen-golang/v2/empty"
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/models"
@@ -36,7 +37,7 @@ func NewGenerator(modules *Modules) *Generator {
 func (g *Generator) AllStaticFiles() []generator.CodeFile {
 	return []generator.CodeFile{
 		*g.EnumsHelperFunctions(),
-		*types.GenerateEmpty(g.Modules.Empty),
+		*empty.GenerateEmpty(g.Modules.Empty),
 		*generateParamsParser(g.Modules.ParamsParser),
 		*g.ResponseHelperFunctions(),
 		*g.CheckContentType(),
