@@ -7,6 +7,7 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/types"
+	"github.com/specgen-io/specgen-golang/v2/walkers"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 	"strings"
 )
@@ -36,7 +37,7 @@ func (g *NetHttpGenerator) client(api *spec.Api) *generator.CodeFile {
 	w.Imports.Add("net/http")
 	w.Imports.Add("encoding/json")
 	w.Imports.AddAliased("github.com/sirupsen/logrus", "log")
-	if types.ApiHasBody(api) {
+	if walkers.ApiHasNonEmptyBody(api) {
 		w.Imports.Add("bytes")
 	}
 	if types.ApiHasUrlParams(api) {

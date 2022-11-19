@@ -4,6 +4,7 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/generator"
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/types"
+	"github.com/specgen-io/specgen-golang/v2/walkers"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 )
 
@@ -26,7 +27,7 @@ func (g *Generator) serviceInterface(api *spec.Api) *generator.CodeFile {
 	}
 	//TODO - potential bug, could be unused import
 	w.Imports.Module(g.Modules.Models(api.InHttp.InVersion))
-	if usingErrorModels(api) {
+	if walkers.ApiIsUsingErrorModels(api) {
 		w.Imports.Module(g.Modules.HttpErrorsModels)
 	}
 
@@ -47,15 +48,3 @@ func (g *Generator) serviceInterface(api *spec.Api) *generator.CodeFile {
 }
 
 const serviceInterfaceName = "Service"
-
-func usingErrorModels(api *spec.Api) bool {
-	foundErrorModels := false
-	walk := spec.NewWalker().
-		OnTypeDef(func(typ *spec.TypeDef) {
-			if typ.Info.Model != nil && typ.Info.Model.InHttpErrors != nil {
-				foundErrorModels = true
-			}
-		})
-	walk.Api(api)
-	return foundErrorModels
-}

@@ -7,6 +7,7 @@ import (
 	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/models"
 	"github.com/specgen-io/specgen-golang/v2/types"
+	"github.com/specgen-io/specgen-golang/v2/walkers"
 	"github.com/specgen-io/specgen-golang/v2/writer"
 	"strings"
 )
@@ -47,13 +48,13 @@ func (g *VestigoGenerator) routing(api *spec.Api) *generator.CodeFile {
 	if types.BodyHasType(api, spec.TypeString) {
 		w.Imports.Add("io/ioutil")
 	}
-	if hasNonEmptyBody(api) {
+	if walkers.ApiHasNonEmptyBody(api) {
 		w.Imports.Module(g.Modules.ContentType)
 	}
 	w.Imports.Module(g.Modules.ServicesApi(api))
 	w.Imports.Module(g.Modules.HttpErrors)
 	w.Imports.Module(g.Modules.HttpErrorsModels)
-	if isRouterUsingModels(api) {
+	if walkers.ApiIsUsingModels(api) {
 		w.Imports.Module(g.Modules.Models(api.InHttp.InVersion))
 	}
 	if operationHasParams(api) {
@@ -418,35 +419,4 @@ func Convert(parsingErrors []paramsparser.ParsingError) []errmodels.ValidationEr
 }
 `)
 	return w.ToCodeFile()
-}
-
-func hasNonEmptyBody(api *spec.Api) bool {
-	hasNonEmptyBody := false
-	walk := spec.NewWalker().
-		OnOperation(func(operation *spec.NamedOperation) {
-			if operation.BodyIs(spec.BodyJson) || operation.BodyIs(spec.BodyString) {
-				hasNonEmptyBody = true
-			}
-		})
-	walk.Api(api)
-	return hasNonEmptyBody
-}
-
-func isRouterUsingModels(api *spec.Api) bool {
-	usingModels := false
-	walk := spec.NewWalker().
-		OnOperation(func(operation *spec.NamedOperation) {
-			if operation.Body != nil {
-				if types.IsModel(&operation.Body.Type.Definition) {
-					usingModels = true
-				}
-			}
-		}).
-		OnParam(func(param *spec.NamedParam) {
-			if param.Type.Definition.Info.Model != nil {
-				usingModels = true
-			}
-		})
-	walk.Api(api)
-	return usingModels
 }
