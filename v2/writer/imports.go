@@ -2,9 +2,7 @@ package writer
 
 import (
 	"fmt"
-	"github.com/specgen-io/specgen-golang/v2/goven/spec"
 	"github.com/specgen-io/specgen-golang/v2/module"
-	"github.com/specgen-io/specgen-golang/v2/walkers"
 	"sort"
 )
 
@@ -62,35 +60,4 @@ func (self *imports) Lines() []string {
 		return lines
 	}
 	return []string{}
-}
-
-func (self *imports) AddApiTypes(api *spec.Api) *imports {
-	if walkers.ApiHasType(api, spec.TypeDate) {
-		self.Add("cloud.google.com/go/civil")
-	}
-	if walkers.ApiHasType(api, spec.TypeJson) {
-		self.Add("encoding/json")
-	}
-	if walkers.ApiHasType(api, spec.TypeUuid) {
-		self.Add("github.com/google/uuid")
-	}
-	if walkers.ApiHasType(api, spec.TypeDecimal) {
-		self.Add("github.com/shopspring/decimal")
-	}
-	return self
-}
-
-func (self *imports) AddModelsTypes(models []*spec.NamedModel) *imports {
-	self.Add("errors")
-	self.Add("encoding/json")
-	if walkers.ModelsHasType(models, spec.TypeDate) {
-		self.Add("cloud.google.com/go/civil")
-	}
-	if walkers.ModelsHasType(models, spec.TypeUuid) {
-		self.Add("github.com/google/uuid")
-	}
-	if walkers.ModelsHasType(models, spec.TypeDecimal) {
-		self.Add("github.com/shopspring/decimal")
-	}
-	return self
 }
