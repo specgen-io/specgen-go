@@ -52,7 +52,31 @@ func ApiHasUrlParams(api *spec.Api) bool {
 	return hasUrlParams
 }
 
-func ApiHasBodyOfKind(api *spec.Api, kind spec.BodyKind) bool {
+func ApiHasHasHeaderParams(api *spec.Api) bool {
+	hasHeaderParams := false
+	walk := spec.NewWalker().
+		OnOperation(func(operation *spec.NamedOperation) {
+			if operation.HeaderParams != nil && len(operation.HeaderParams) > 0 {
+				hasHeaderParams = true
+			}
+		})
+	walk.Api(api)
+	return hasHeaderParams
+}
+
+func OperationHasHeaderParams(operation *spec.NamedOperation) bool {
+	hasHeaderParams := false
+	walk := spec.NewWalker().
+		OnOperation(func(operation *spec.NamedOperation) {
+			if operation.HeaderParams != nil && len(operation.HeaderParams) > 0 {
+				hasHeaderParams = true
+			}
+		})
+	walk.Operation(operation)
+	return hasHeaderParams
+}
+
+func ApiHasBodyOfKind(api *spec.Api, kind spec.RequestBodyKind) bool {
 	result := false
 	walk := spec.NewWalker().
 		OnOperation(func(operation *spec.NamedOperation) {
@@ -68,7 +92,19 @@ func ApiHasMultiResponsesWithEmptyBody(api *spec.Api) bool {
 	result := false
 	walk := spec.NewWalker().
 		OnOperationResponse(func(response *spec.OperationResponse) {
-			if len(response.Operation.Responses) > 1 && response.BodyIs(spec.BodyEmpty) {
+			if len(response.Operation.Responses) > 1 && response.Body.Is(spec.ResponseBodyEmpty) {
+				result = true
+			}
+		})
+	walk.Api(api)
+	return result
+}
+
+func ApiHasMultiSuccessResponsesWithEmptyBody(api *spec.Api) bool {
+	result := false
+	walk := spec.NewWalker().
+		OnOperationResponse(func(response *spec.OperationResponse) {
+			if len(response.Operation.Responses.Success()) > 1 && response.Body.Is(spec.ResponseBodyEmpty) {
 				result = true
 			}
 		})

@@ -39,19 +39,19 @@ func (g *Generator) serviceImpl(api *spec.Api) *generator.CodeFile {
 		w.Imports.Module(g.Modules.Models(api.InHttp.InVersion))
 	}
 
-	w.EmptyLine()
 	w.Line(`type %s struct{}`, serviceTypeName(api))
 	w.EmptyLine()
 	apiPackage := api.Name.SnakeCase()
 	for _, operation := range api.Operations {
 		w.Line(`func (service *%s) %s {`, serviceTypeName(api), g.operationSignature(&operation, &apiPackage))
-		singleEmptyResponse := len(operation.Responses) == 1 && operation.Responses[0].Type.Definition.IsEmpty()
+		singleEmptyResponse := len(operation.Responses) == 1 && operation.Responses[0].Body.IsEmpty()
 		if singleEmptyResponse {
 			w.Line(`  return errors.New("implementation has not added yet")`)
 		} else {
 			w.Line(`  return nil, errors.New("implementation has not added yet")`)
 		}
 		w.Line(`}`)
+		w.EmptyLine()
 	}
 
 	return w.ToCodeFile()
